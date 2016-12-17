@@ -1,50 +1,5 @@
 angular.module('starter.controllers', [])
-  .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log, $ionicModal) {
-    $scope.toggleLeft = buildDelayedToggler('left');
-
-    /**
-     * Supplies a function that will continue to operate until the
-     * time is up.
-     */
-    function debounce(func, wait, context) {
-      var timer;
-
-      return function debounced() {
-        var context = $scope,
-          args = Array.prototype.slice.call(arguments);
-        $timeout.cancel(timer);
-        timer = $timeout(function() {
-          timer = undefined;
-          func.apply(context, args);
-        }, wait || 10);
-      };
-    }
-
-    /**
-     * Build handler to open/close a SideNav; when animation finishes
-     * report completion in console
-     */
-    function buildDelayedToggler(navID) {
-      return debounce(function() {
-        // Component lookup should always be available since we are not using `ng-if`
-        $mdSidenav(navID)
-          .toggle()
-          .then(function () {
-            $log.debug("toggle " + navID + " is done");
-          });
-      }, 200);
-    }
-
-    function buildToggler(navID) {
-      return function() {
-        // Component lookup should always be available since we are not using `ng-if`
-        $mdSidenav(navID)
-          .toggle()
-          .then(function () {
-            $log.debug("toggle " + navID + " is done");
-          });
-      }
-    }
+  .controller('AppCtrl', function ($scope, $timeout, $log, $ionicModal) {
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -83,25 +38,11 @@ angular.module('starter.controllers', [])
         $scope.closeLogin();
       }, 1000);
     };
-  })
-  .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log) {
-    $scope.close = function () {
-      // Component lookup should always be available since we are not using `ng-if`
-      $mdSidenav('left').close()
-        .then(function () {
-          $log.debug("close LEFT is done");
-        });
 
-    };
-  })
-  .controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log) {
-    $scope.close = function () {
-      // Component lookup should always be available since we are not using `ng-if`
-      $mdSidenav('right').close()
-        .then(function () {
-          $log.debug("close RIGHT is done");
-        });
-    };
+    $scope.closeApp=function() {
+      ionic.Platform.exitApp();
+      $log.debug("app closed");
+    }
   })
 
   .controller('PlaylistsCtrl', function($scope) {
@@ -130,7 +71,7 @@ angular.module('starter.controllers', [])
   })
 
   .controller('WhatWeDoCtrl', function () {
-    var home = angular.extend( this, {
+    var work = angular.extend( this, {
       members:[]
     })
   })
@@ -140,3 +81,52 @@ angular.module('starter.controllers', [])
       members:[]
     })
   })
+  .controller('MediaCtrl', function () {
+    var home = angular.extend( this, {
+      members:[]
+    })
+  })
+  .controller('DonateCtrl', function ($scope) {
+    var home = angular.extend( this, {
+      members:[]
+    });
+    $scope.user = {
+          title: 'Developer',
+          email: 'ipsum@lorem.com',
+          firstName: '',
+          lastName: '',
+          company: 'Google',
+          address: '1600 Amphitheatre Pkwy',
+          city: 'Mountain View',
+          state: 'CA',
+          biography: 'Loves kittens, snowboarding, and can type at 130 WPM.\n\nAnd rumor has it she bouldered up Castle Craig!',
+          postalCode: '94043'
+        };
+
+        $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
+        'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
+        'WY').split(' ').map(function(state) {
+          return {abbrev: state};
+        });
+  })
+  .controller('OurStoryCtrl', function () {
+    var home = angular.extend( this, {
+      members:[]
+    })
+  })
+  .controller('JoinCtrl', function () {
+    var home = angular.extend( this, {
+      members:[]
+    })
+  })
+  .controller('ShareCtrl', function () {
+    var home = angular.extend( this, {
+      members:[]
+    })
+  })
+  .controller('AccountsCtrl', function () {
+    var home = angular.extend( this, {
+      members:[]
+    })
+  })
+

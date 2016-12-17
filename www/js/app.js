@@ -22,7 +22,13 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider) {
+  // Configure a dark theme with primary foreground yellow
+
+  $mdThemingProvider.theme('docs-dark', 'default')
+    .primaryPalette('yellow')
+    .dark();
+
   $stateProvider
 
     .state('app', {
@@ -31,16 +37,6 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
     templateUrl: 'templates/menu.html',
     controller: 'AppCtrl'
   })
-
-  .state('app.search', {
-    url: '/search',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/search.html'
-      }
-    }
-  })
-
   .state('app.home', {
     url: '/home',
     views: {
@@ -57,6 +53,78 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
       'menuContent': {
         templateUrl: 'templates/crisis.html',
         controller: 'CrisisCtrl as crisis'
+      }
+    }
+  })
+  .state('app.whatwedo', {
+    url: '/what_we_do',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/whatwedo.html',
+        controller: 'WhatWeDoCtrl as wc'
+      }
+    }
+  })
+  .state('app.ourimpact', {
+    url: '/our_impact',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/ourimpact.html',
+        controller: 'OurImpactCtrl as ic'
+      }
+    }
+  })
+  .state('app.media', {
+    url: '/media',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/media.html',
+        controller: 'MediaCtrl as mc'
+      }
+    }
+  })
+  .state('app.donate', {
+    url: '/donate',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/donate.html',
+        controller: 'DonateCtrl as dc'
+      }
+    }
+  })
+  .state('app.ourstory', {
+    url: '/our_story',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/ourstory.html',
+        controller: 'OurStoryCtrl as oc'
+      }
+    }
+  })
+  .state('app.join', {
+    url: '/join_the_movement',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/join.html',
+        controller: 'JoinCtrl as jc'
+      }
+    }
+  })
+  .state('app.share', {
+    url: '/share',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/share.html',
+        controller: 'ShareCtrl as sc'
+      }
+    }
+  })
+  .state('app.accounts', {
+    url: '/your_account',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/accounts.html',
+        controller: 'AccountsCtrl as ac'
       }
     }
   })
