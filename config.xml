@@ -2,7 +2,8 @@
 <widget id="org.youthsocialservice.app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>YouthSocialService</name>
     <description>
-        An Ionic Framework and Cordova project.
+        A small effort with big goals, a way to save the future of child and needy people, make life enjoyable and healthy.
+      Love All, Serve All.
     </description>
     <author email="shubham.jaiswal357@gmail.com.com" href="http://example.com/">
       Shubham Jaiswal
