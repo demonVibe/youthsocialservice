@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.controllers', 'firebase'])
+angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.controllers', 'firebase', 'ion-gallery'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -22,12 +22,19 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider) {
+.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, ionGalleryConfigProvider) {
   // Configure a dark theme with primary foreground yellow
 
   $mdThemingProvider.theme('docs-dark', 'default')
     .primaryPalette('yellow')
     .dark();
+
+  ionGalleryConfigProvider.setGalleryConfig({
+    action_label: 'Close',
+    toggle: false,
+    row_size: 3,
+    fixed_row_size: true
+  });
 
   $stateProvider
   .state('app', {

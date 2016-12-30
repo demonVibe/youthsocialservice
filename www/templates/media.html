@@ -9,22 +9,31 @@
       </md-tab>
       <md-tab label="Gallery">
         <md-content class="md-padding">
-          <h1 class="md-display-2">Event Pictures</h1>
-          <div ng-repeat="e in mc.events" ng-if="$index%2==0" class="row columns-two">
-            <div class="card col home margin-bottom-0 ">
-              <a class="item item-text-wrap padding-0" ng-click="mc.showEventImages(mc.events[$index])">
-                <img class="category-image" ng-src="{{mc.events[$index].pictures[0]||'images/default.jpg'}}">
-                <h2 class="category-padding">{{mc.events[$index].title}}</h2>
-              </a>
-            </div>
+          <!--<h1 class="md-display-2">Event Pictures</h1>-->
+          <md-tabs md-selected="mc.selectedIndex" md-border-bottom="" md-autoselect="">
+            <md-tab ng-repeat="tab in mc.tabs" ng-disabled="tab.disabled" label="{{tab.title}}">
+              <div style="padding: 25px; text-align: center;">
+                <div ng-bind="tab.content"></div>
+              </div>
+              <ion-gallery ion-gallery-items="tab.events"></ion-gallery>
+            </md-tab>
+          </md-tabs>
 
-            <div class="card col home margin-bottom-0 " ng-if="mc.events[$index + 1]">
-              <a class="item item-text-wrap padding-0" ng-click="mc.showEventImages(mc.events[$index + 1])">
-                <img class="category-image" ng-src="{{mc.events[$index+1].pictures[0]||'images/default.jpg'}}">
-                <h2 class="category-padding">{{mc.events[$index + 1].title}}</h2>
-              </a>
-            </div>
-          </div>
+          <!--<div ng-repeat="e in mc.events" ng-if="$index%2==0" class="row columns-two">-->
+            <!--<div class="card col home margin-bottom-0 ">-->
+              <!--<a class="item item-text-wrap padding-0" ng-click="mc.showEventImages(mc.events[$index])">-->
+                <!--<img class="category-image" ng-src="{{mc.events[$index].pictures[0]||'images/default.jpg'}}">-->
+                <!--<h2 class="category-padding">{{mc.events[$index].title}}</h2>-->
+              <!--</a>-->
+            <!--</div>-->
+
+            <!--<div class="card col home margin-bottom-0 " ng-if="mc.events[$index + 1]">-->
+              <!--<a class="item item-text-wrap padding-0" ng-click="mc.showEventImages(mc.events[$index + 1])">-->
+                <!--<img class="category-image" ng-src="{{mc.events[$index+1].pictures[0]||'images/default.jpg'}}">-->
+                <!--<h2 class="category-padding">{{mc.events[$index + 1].title}}</h2>-->
+              <!--</a>-->
+            <!--</div>-->
+          <!--</div>-->
         </md-content>
       </md-tab>
       <md-tab label="Videos">
