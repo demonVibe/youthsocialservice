@@ -79,21 +79,29 @@ angular.module('starter.controllers', [])
         ]},
         { title: 'Two', content: "You can swipe left and right on a mobile device to change tabs.", events: [
           {
-            src:'http://www.wired.com/images_blogs/rawfile/2013/11/offset_WaterHouseMarineImages_62652-2-660x440.jpg',
+            src:'http://www.planwallpaper.com/static/images/6783068-cool-wallpapers-hd.jpg',
             sub: 'This is a <b>subtitle</b>'
           },
           {
-            src:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg',
+            src:'http://www.planwallpaper.com/static/images/cool_eyes_cat_3d_wallpapers_hd.jpg',
             sub: '' /* Not showed */
           },
           {
-            src:'http://www.planwallpaper.com/static/images/bicycle-1280x720.jpg',
+            src:'http://www.planwallpaper.com/static/images/cool-hd-apple-desktop-full-hd-city.jpg',
             thumb:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg'
           }
         ]},
         { title: 'Three', content: "You can bind the selected tab via the selected attribute on the md-tabs element.", events: [
           {
-            src:'http://www.wired.com/images_blogs/rawfile/2013/11/offset_WaterHouseMarineImages_62652-2-660x440.jpg',
+            src:'http://www.planwallpaper.com/static/images/Cool-HD-Wallpapers-1_9j9pfu8.jpg',
+            sub: 'This is a <b>subtitle</b>'
+          },
+          {
+            src:'http://www.planwallpaper.com/static/images/full-hd-tv-882332.jpg',
+            sub: 'This is a <b>subtitle</b>'
+          },
+          {
+            src:'http://www.planwallpaper.com/static/images/eyes-3d-cool-hd-wallpapers-fullscreen-background.jpg',
             sub: 'This is a <b>subtitle</b>'
           },
           {
@@ -101,8 +109,8 @@ angular.module('starter.controllers', [])
             sub: '' /* Not showed */
           },
           {
-            src:'http://www.planwallpaper.com/static/images/bicycle-1280x720.jpg',
-            thumb:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg'
+            src:'http://www.planwallpaper.com/static/images/cool-wallpaper-8.jpg',
+            thumb:'http://www.planwallpaper.com/static/images/cool-wallpaper-8.jpg'
           }
         ]},
         { title: 'Four', content: "If you set the selected tab binding to -1, it will leave no tab selected.", events: [
@@ -203,7 +211,7 @@ angular.module('starter.controllers', [])
             thumb:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg'
           }
         ]}
-      ]
+      ];
     mc.selectedIndex = 0;
     // $scope.$watch('selectedIndex', function(current, old){
     //   previous = selected;
@@ -258,8 +266,32 @@ angular.module('starter.controllers', [])
       members:[]
     })
   })
-  .controller('AccountsCtrl', function () {
-    var home = angular.extend( this, {
-      members:[]
-    })
-  })
+  .controller('AccountsCtrl', function ($log) {
+    var ac = angular.extend( this, {
+      members:[],
+      google:google
+    });
+    function google() {
+      $log.debug("Inside Google");
+      document.addEventListener('deviceready', deviceReady, false);
+
+      function deviceReady() {
+        // I get called when everything's ready for the plugin to be called!
+        console.log('Device is ready!');
+        window.plugins.googleplus.trySilentLogin(
+          {
+            // 'scopes': '... ', // optional, space-separated list of scopes, If not included or empty, defaults to `profile` and `email`.
+            // 'webClientId': '528631628442-bjb7ubb6ds81lb0l7e925p3ovsb46ebr.apps.googleusercontent.com', // optional clientId of your Web application from Credentials settings of your project - On Android, this MUST be included to get an idToken. On iOS, it is not required.
+            // 'offline': true, // optional, but requires the webClientId - if set to true the plugin will also return a serverAuthCode, which can be used to grant offline access to a non-Google server
+          },
+          function (obj) {
+            alert(JSON.stringify(obj)); // do something useful instead of alerting
+            console.log(obj);
+          },
+          function (msg) {
+            alert('error: ' + msg);
+          }
+        );
+      }
+    }
+  });

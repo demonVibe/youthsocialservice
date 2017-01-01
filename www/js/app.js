@@ -135,4 +135,16 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
   })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
+})
+  
+.directive('myclick', function() {
+  return function(scope, element, attrs) {
+    element.bind('touchstart click', function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (event.type === 'click') {
+        scope.$apply(attrs['myclick']);
+      }
+    });
+  };
 });
