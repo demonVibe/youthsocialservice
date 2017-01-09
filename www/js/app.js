@@ -22,12 +22,14 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, ionGalleryConfigProvider) {
+.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, ionGalleryConfigProvider, $mdGestureProvider) {
   // Configure a dark theme with primary foreground yellow
 
   $mdThemingProvider.theme('docs-dark', 'default')
     .primaryPalette('yellow')
     .dark();
+
+  $mdGestureProvider.skipClickHijack();
 
   ionGalleryConfigProvider.setGalleryConfig({
     action_label: 'Close',
@@ -133,18 +135,15 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
       }
     }
   })
+  .state('app.contact', {
+    url: '/contact',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/contact.html',
+        // controller: 'ContactsCtrl as cc'
+      }
+    }
+  })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
 })
-  
-.directive('myclick', function() {
-  return function(scope, element, attrs) {
-    element.bind('touchstart click', function(event) {
-      event.preventDefault();
-      event.stopPropagation();
-      if (event.type === 'click') {
-        scope.$apply(attrs['myclick']);
-      }
-    });
-  };
-});

@@ -269,9 +269,9 @@ angular.module('starter.controllers', [])
   .controller('AccountsCtrl', function ($log) {
     var ac = angular.extend( this, {
       members:[],
-      google:google
+      login:login
     });
-    function google() {
+    function login() {
       $log.debug("Inside Google");
       document.addEventListener('deviceready', deviceReady, false);
 
