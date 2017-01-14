@@ -18,31 +18,69 @@
             <div class="md-subhead">9460430046 | 9509646220</div>
           </div>
           <md-divider></md-divider>
-          <div layout="row" layout-align="center">
+          <div layout="row" layout-align="center" style="text-align: center">
             <div class="md-subhead"><b>E-Mail: </b>youthsocialserviceorganisation@gmail.com</div>
           </div>
         </md-card>
-        <!--<div layout="row" layout-align="center">-->
-          <!--<div class="md-subhead" style="margin-left: 20px"><b>Address: </b>Youth social service organisation, <br>Shop no. 05, Bhatiwal complex, Ram Nagar , Sardarshahar</div>-->
-        <!--</div>-->
+        <md-divider></md-divider>
+        <div class="row">
+          <div class="col">
+            <div class="row" style="text-align: center">
+              <div class="col">
+                <h3>Addresses</h3>
+              </div>
+            </div>
+            <div class="row" style="text-align: center">
+              <div class="col">
+                Youth social service organisation,
+                Shop no. 05, Bhatiwal complex,
+                Ram Nagar, Sardarshahar
+              </div>
+              <div class="col">
+                B-11/3, Chinab Apartment
+                Sector-28, Pratap Nagar,
+                Jaipur, Rajasthan
+              </div>
+            </div>
+            <div class="row" style="text-align: center">
+              <div class="col">
+                <h5>Head Office</h5>
+              </div>
+              <div class="col">
+                <h5>Branch Office</h5>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <!--<div flex-xs="" flex-gt-xs="50" layout="column">-->
-        <!--<md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch="">-->
-          <!--<md-card-title>-->
-            <!--<md-card-title-text>-->
-              <!--<span class="md-headline">Card with image</span>-->
-              <!--<span class="md-subhead">Small</span>-->
-            <!--</md-card-title-text>-->
-            <!--<md-card-title-media>-->
-              <!--<div class="md-media-sm card-media"></div>-->
-            <!--</md-card-title-media>-->
-          <!--</md-card-title>-->
-          <!--<md-card-actions layout="row" layout-align="end center">-->
-            <!--<md-button>Action 1</md-button>-->
-            <!--<md-button>Action 2</md-button>-->
-          <!--</md-card-actions>-->
-        <!--</md-card>-->
-      <!--</div>-->
+      <div style="height: 50px">
+        <md-fab-speed-dial
+          ng-hide="cc.hidden"
+          md-direction="left"
+          md-open="cc.isOpen"
+          class="md-scale md-fab-bottom-right"
+          ng-class="{ 'md-hover-full': cc.hover }"
+          ng-mouseenter="cc.isOpen=true"
+          ng-mouseleave="cc.isOpen=false">
+          <md-fab-trigger>
+            <md-button aria-label="Social" class="md-fab md-accent md-hue-1">
+              <md-tooltip md-direction="top" md-visible="tooltipVisible">Social Contact</md-tooltip>
+              <md-icon md-svg-src="img/ic_share_black_24px.svg" aria-label="Social"></md-icon>
+            </md-button>
+          </md-fab-trigger>
+          <md-fab-actions>
+            <div ng-repeat="item in cc.items">
+              <md-button ng-href="{{item.url}}" target="_blank" aria-label="{{item.name}}" class="md-fab md-raised md-mini">
+                <md-tooltip md-direction="{{item.direction}}" md-visible="tooltipVisible" md-autohide="false">
+                  {{item.name}}
+                </md-tooltip>
+
+                <md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>
+              </md-button>
+            </div>
+          </md-fab-actions>
+        </md-fab-speed-dial>
+      </div>
     </md-content>
   </ion-content>
 </ion-view>

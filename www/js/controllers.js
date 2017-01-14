@@ -17,13 +17,36 @@ angular.module('starter.controllers', [])
       $ionicSideMenuDelegate.toggleLeft();
     }
   })
-  .controller('HomeCtrl', function () {
+  .controller('HomeCtrl', function ($scope) {
     var home = angular.extend( this, {
       members:[]
     })
+    $scope.myInterval = 3000;
+    $scope.slides = [
+      {
+        image: 'http://lorempixel.com/200/200/'
+      },
+      {
+        image: 'http://lorempixel.com/200/200/food'
+      },
+      {
+        image: 'http://lorempixel.com/200/200/sports'
+      },
+      {
+        image: 'http://lorempixel.com/200/200/people'
+      }
+    ];
   })
   .controller('CrisisCtrl', function () {
     var crisis = angular.extend( this, {
+      edSysLabels : ["Unable", "Able"],
+      edSysData : [76,24],
+      readLabels : ["Cannot", "Can"],
+      readData: [52,48],
+      absLabels : ["Absent", "Present"],
+      absData: [17,83],
+      gtLabels : ["Usable", "Unusable"],
+      gtData: [55,45],
     })
   })
   .controller('WhatWeDoCtrl', function () {
@@ -36,7 +59,7 @@ angular.module('starter.controllers', [])
       members:[]
     })
   })
-  .controller('MediaCtrl', function ($scope) {
+  .controller('MediaCtrl', function () {
     var mc = angular.extend( this, {
       members:[],
       events:[
@@ -294,4 +317,31 @@ angular.module('starter.controllers', [])
         );
       }
     }
-  });
+  })
+  .controller('ContactCtrl', function ($scope, $mdDialog, $timeout) {
+    var cc = this;
+
+    cc.hidden = false;
+    cc.isOpen = false;
+    cc.hover = true;
+
+    // On opening, add a delayed property which shows tooltips after the speed dial has opened
+    // so that they have the proper position; if closing, immediately hide the tooltips
+    $scope.$watch('demo.isOpen', function(isOpen) {
+      if (isOpen) {
+        $timeout(function() {
+          $scope.tooltipVisible = cc.isOpen;
+        }, 600);
+      } else {
+        $scope.tooltipVisible = cc.isOpen;
+      }
+    });
+
+    cc.items = [
+      { name: "Blog", icon: "img/social-hand-drawn/svg/blogger-drew-logo.svg", direction: "bottom", url: 'https://youthsocialservicesy2s.blogspot.in' },
+      { name: "Twitter", icon: "img/social-hand-drawn/svg/twitter-draw-logo.svg", direction: "top", url: 'https://m.facebook.com/y2s2414/' },
+      { name: "Instagram", icon: "img/social-hand-drawn/svg/instagram-draw-logo.svg", direction: "bottom", url: 'https://m.facebook.com/y2s2414/' },
+      { name: "Facebook", icon: "img/social-hand-drawn/svg/facebook.svg", direction: "top", url: 'https://m.facebook.com/y2s2414/' },
+      { name: "Google Plus", icon: "img/social-hand-drawn/svg/google-plus-draw-logo.svg", direction: "bottom", url: 'https://m.facebook.com/y2s2414/' },
+    ];
+});

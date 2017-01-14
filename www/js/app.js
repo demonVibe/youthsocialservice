@@ -4,7 +4,8 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.controllers', 'firebase', 'ion-gallery'])
+angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.controllers',
+  'firebase', 'ion-gallery', 'material.svgAssetsCache', 'chart.js', 'jkAngularCarousel'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -22,8 +23,16 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, ionGalleryConfigProvider, $mdGestureProvider) {
+.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, ionGalleryConfigProvider, $mdGestureProvider, $mdIconProvider, ChartJsProvider) {
   // Configure a dark theme with primary foreground yellow
+
+  ChartJsProvider.setOptions({
+    colors : [ '#ff6384', '#803690', '#00ADF9', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
+  });
+
+  $mdIconProvider
+    .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
+    .defaultIconSet('img/icons/sets/core-icons.svg', 24);
 
   $mdThemingProvider.theme('docs-dark', 'default')
     .primaryPalette('yellow')
@@ -140,7 +149,7 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
     views: {
       'menuContent': {
         templateUrl: 'templates/contact.html',
-        // controller: 'ContactsCtrl as cc'
+        controller: 'ContactCtrl as cc'
       }
     }
   })
