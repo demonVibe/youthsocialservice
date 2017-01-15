@@ -1,11 +1,23 @@
 <ion-view view-title="What We Do">
   <ion-content>
+    <md-progress-linear md-mode="indeterminate" ng-if="ww.slides.length==0"></md-progress-linear>
     <md-content class="md-padding" layout="row">
       <div flex-xs="" layout="column">
         <md-card>
-          <img ng-src="img/icon.png" class="md-card-image" alt="Washed Out">
+          <!--<img ng-src="img/icon.png" class="md-card-image">-->
           <md-card-content>
-            <p>
+            <md-card layout="column" layout-align="center center" style="padding-bottom: 10px; padding-top: 10px" >
+              <!--<h4>What We Do</h4>-->
+              <jk-carousel
+                data="ww.slides"
+                item-template-url="'templates/slide-work.html'"
+                max-width="320"
+                max-height="240"
+                auto-slide="true"
+                auto-slide-time="3000" >
+              </jk-carousel>
+            </md-card>
+            <div>
               <p>
                 Welcome to the official App of Y2S. "Youth Social Service Organisation" was established in 2016 under Rajasthan Society Registration Act 1958.
                 It is a small step taken towards the concern for poor and needy people in the society.
@@ -33,7 +45,7 @@
               <p>
                 Enforcing Greenery, Plantation
               </p>
-            </p>
+            </div>
           </md-card-content>
         </md-card>
       </div>

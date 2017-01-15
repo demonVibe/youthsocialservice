@@ -5,5 +5,5 @@ angular.module('starter.services', [])
 
   .factory("events",function ($firebaseArray) {
     var eventsRef = firebase.database().ref().child('events');
-    return $firebaseArray(eventsRef);
+    return $firebaseArray(eventsRef).$loaded();
   });

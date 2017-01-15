@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.controllers',
+angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.controllers', 'starter.services',
   'firebase', 'ion-gallery', 'material.svgAssetsCache', 'chart.js', 'jkAngularCarousel'])
 
 .run(function($ionicPlatform) {
@@ -77,7 +77,7 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
     views: {
       'menuContent': {
         templateUrl: 'templates/whatwedo.html',
-        controller: 'WhatWeDoCtrl as wc'
+        controller: 'WhatWeDoCtrl as ww'
       }
     }
   })
@@ -113,7 +113,7 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
     views: {
       'menuContent': {
         templateUrl: 'templates/ourstory.html',
-        controller: 'OurStoryCtrl as oc'
+        controller: 'OurStoryCtrl as os'
       }
     }
   })

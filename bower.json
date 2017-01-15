@@ -10,6 +10,7 @@
     "angularfire": "^2.1.0",
     "ion-gallery": "^0.1.14",
     "angular-chart.js": "^1.1.1",
-    "angular-jk-carousel": "^0.1.9"
+    "angular-jk-carousel": "^0.1.9",
+    "lodash": "^4.17.4"
   }
 }
