@@ -1,4 +1,7 @@
-angular.module('starter.controllers', [])
+(function() {
+  'use strict';
+
+  angular.module('starter.controllers', [])
   .controller('AppCtrl', function ($scope, $timeout, $log, $ionicModal, $ionicSideMenuDelegate) {
 
     // With the new view caching in Ionic, Controllers are only called
@@ -383,14 +386,46 @@ angular.module('starter.controllers', [])
       members:[]
     })
   })
-  .controller('AccountsCtrl', function ($log, $scope, $rootScope, $ionicLoading, $ionicPopup, $q, User, firebaseDataService) {
+  .controller('ContactCtrl', function ($scope, $mdDialog, $timeout) {
+  var cc = this;
+
+  cc.hidden = false;
+  cc.isOpen = false;
+  cc.hover = true;
+
+  // On opening, add a delayed property which shows tooltips after the speed dial has opened
+  // so that they have the proper position; if closing, immediately hide the tooltips
+  $scope.$watch('demo.isOpen', function(isOpen) {
+    if (isOpen) {
+      $timeout(function() {
+        $scope.tooltipVisible = cc.isOpen;
+      }, 600);
+    } else {
+      $scope.tooltipVisible = cc.isOpen;
+    }
+  });
+
+  cc.items = [
+    { name: "Blog", icon: "img/social-hand-drawn/svg/blogger-drew-logo.svg", direction: "bottom", url: 'https://youthsocialservicesy2s.blogspot.in' },
+    { name: "Twitter", icon: "img/social-hand-drawn/svg/twitter-draw-logo.svg", direction: "top", url: 'https://m.facebook.com/y2s2414/' },
+    { name: "Instagram", icon: "img/social-hand-drawn/svg/instagram-draw-logo.svg", direction: "bottom", url: 'https://m.facebook.com/y2s2414/' },
+    { name: "Facebook", icon: "img/social-hand-drawn/svg/facebook.svg", direction: "top", url: 'https://m.facebook.com/y2s2414/' },
+    { name: "Google Plus", icon: "img/social-hand-drawn/svg/google-plus-draw-logo.svg", direction: "bottom", url: 'https://m.facebook.com/y2s2414/' },
+  ];
+})
+  .controller('AccountsCtrl', AccountsCtrl)
+  .controller('PanelCtrl', PanelCtrl);
+
+  function AccountsCtrl ($log, $scope, $rootScope, $ionicLoading, $ionicPopup, $q, User, firebaseDataService, $mdPanel) {
     var ac = angular.extend( this, {
       email:"",
       password:"",
     });
-    ac.test=function (data) {
-      console.log(data);
+    activate();
+    function activate() {
+      ac._mdPanel = $mdPanel;
     }
+
     ac.googleLogin = function () {
       $log.debug("Inside Google");
       document.addEventListener('deviceready', deviceReady, false);
@@ -518,7 +553,8 @@ angular.module('starter.controllers', [])
 
 //This method is executed when the user press the "Dont have an account" link
     ac.createAccount = function () {
-      createPopup();
+      // createPopup();
+      // showPanel();
     };
     var createPopup = function() {
       var scope = $scope.$new();
@@ -619,31 +655,63 @@ angular.module('starter.controllers', [])
         $ionicLoading.hide();
       });
     };
-  })
-  .controller('ContactCtrl', function ($scope, $mdDialog, $timeout) {
-    var cc = this;
+  }
+  AccountsCtrl.prototype.showDialog = function() {
+    var position = this._mdPanel.newPanelPosition()
+      .absolute()
+      // .right()
+      // .top('30%')
+      // .bottom()
+      // .left('5%')
 
-    cc.hidden = false;
-    cc.isOpen = false;
-    cc.hover = true;
+    var animation = this._mdPanel.newPanelAnimation();
 
-    // On opening, add a delayed property which shows tooltips after the speed dial has opened
-    // so that they have the proper position; if closing, immediately hide the tooltips
-    $scope.$watch('demo.isOpen', function(isOpen) {
-      if (isOpen) {
-        $timeout(function() {
-          $scope.tooltipVisible = cc.isOpen;
-        }, 600);
-      } else {
-        $scope.tooltipVisible = cc.isOpen;
-      }
+    animation.openFrom({
+      top: document.documentElement.clientHeight,
+      left: document.documentElement.clientWidth / 2 - 250
+    });
+    animation.closeTo({
+      top: document.documentElement.clientHeight,
+      left: document.documentElement.clientWidth / 2 - 250
+    });
+    animation.withAnimation(this._mdPanel.animation.SLIDE);
+
+    var config = {
+      animation: animation,
+      attachTo: angular.element(document.body),
+      controller: PanelCtrl,
+      controllerAs: 'pc',
+      templateUrl: 'templates/email-signup.html',
+      panelClass: 'signup-panel-container',
+      position: position,
+      trapFocus: true,
+      zIndex: 150,
+      clickOutsideToClose: false,
+      clickEscapeToClose: false,
+      hasBackdrop: true,
+      fullscreen:true,
+    };
+
+    this._mdPanel.open(config);
+  };
+
+  function PanelCtrl(mdPanelRef) {
+    var pc = angular.extend( this, {
+      email:"",
+      password:"",
+      repassword:"",
     });
 
-    cc.items = [
-      { name: "Blog", icon: "img/social-hand-drawn/svg/blogger-drew-logo.svg", direction: "bottom", url: 'https://youthsocialservicesy2s.blogspot.in' },
-      { name: "Twitter", icon: "img/social-hand-drawn/svg/twitter-draw-logo.svg", direction: "top", url: 'https://m.facebook.com/y2s2414/' },
-      { name: "Instagram", icon: "img/social-hand-drawn/svg/instagram-draw-logo.svg", direction: "bottom", url: 'https://m.facebook.com/y2s2414/' },
-      { name: "Facebook", icon: "img/social-hand-drawn/svg/facebook.svg", direction: "top", url: 'https://m.facebook.com/y2s2414/' },
-      { name: "Google Plus", icon: "img/social-hand-drawn/svg/google-plus-draw-logo.svg", direction: "bottom", url: 'https://m.facebook.com/y2s2414/' },
-    ];
-});
+    pc.compare = function (repass) {
+      // if(repass.length>5){
+        pc.isconfirm = pc.password == repass ? true : false;
+      // }
+    }
+
+    this._mdPanelRef = mdPanelRef;
+    this.closeDialog = function() {
+      console.log("here")
+      this._mdPanelRef && this._mdPanelRef.close();
+    };
+  }
+})();

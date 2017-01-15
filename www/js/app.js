@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.controllers', 'starter.services',
   'firebase', 'ion-gallery', 'material.svgAssetsCache', 'chart.js', 'jkAngularCarousel'])
-
+  
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -154,6 +154,15 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
       }
     }
   })
+  // .state('app.signup', {
+  //   url: '/signup',
+  //   views: {
+  //     'menuContent': {
+  //       templateUrl: 'templates/email-signup.html',
+  //       controller: 'PanelCtrl as ctrl'
+  //     }
+  //   }
+  // })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
 })
