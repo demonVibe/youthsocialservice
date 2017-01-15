@@ -383,13 +383,15 @@ angular.module('starter.controllers', [])
       members:[]
     })
   })
-  .controller('AccountsCtrl', function ($log, $scope, $ionicLoading, $ionicPopup, $q) {
+  .controller('AccountsCtrl', function ($log, $scope, $rootScope, $ionicLoading, $ionicPopup, $q, User, firebaseDataService) {
     var ac = angular.extend( this, {
-      members:[],
-      login:login,
-      user:{}
+      email:"",
+      password:"",
     });
-    function login() {
+    ac.test=function (data) {
+      console.log(data);
+    }
+    ac.googleLogin = function () {
       $log.debug("Inside Google");
       document.addEventListener('deviceready', deviceReady, false);
 
@@ -413,66 +415,13 @@ angular.module('starter.controllers', [])
       }
     }
     //This method is executed when the user press the "SignIn with Email" link
-    ac.emailSignIn = function () {
-      var loggedInUser={};
-      // 	signInPopup();
-      // };
-      //
-      // var signInPopup = function() {
-      // 	var scope = $scope.$new();
-      // 	scope.data = {};
-      // 	var myPopup = $ionicPopup.show({
-      // 		templateUrl: 'scripts/login/emailLogin.html',
-      // 		title: 'Login using your Email',
-      // 		subTitle: 'Login',
-      // 		scope: scope,
-      // 		buttons: [{
-      // 			text: 'Cancel',
-      // 			onTap: function (e) {
-      // 				scope.data.canceled = true;
-      // 				return scope.data;
-      // 			}
-      // 		}, {
-      // 			text: '<b>Log In</b>',
-      // 			type: 'button-positive',
-      // 			onTap: function (e) {
-      // 				var email = scope.data.email;
-      // 				if (email && email.length > 3) {
-      // 					return scope.data;
-      // 				} else {
-      // 					alert('Enter correct email');
-      // 					e.preventDefault();
-      // 				}
-      // 				var pass = scope.data.password;
-      // 				if (pass && pass.length > 5) {
-      // 					return scope.data;
-      // 				} else {
-      // 					alert('Min length of password is 6');
-      // 					e.preventDefault();
-      // 				}
-      // 			}
-      // 		}]
-      // 	});
-      // myPopup.then(function(res) {
-      // 	console.log(res);
-      // });
-      // myPopup.then(function (result) {
-      // 	if (result.canceled) {
-      // 		return;
-      // 	}
-      // 	$ionicLoading.show({
-      // 		template: 'Logging In...'
-      // 	});
-      var signInDetails = {
-        email: ac.user.email,
-        password: ac.user.password
-      };
-      firebase.auth().signInWithEmailAndPassword(signInDetails.email, signInDetails.password).then(function(response){
+    ac.emailLogin = function () {
+      $ionicLoading.show();
+      firebase.auth().signInWithEmailAndPassword(ac.email, ac.password).then(function(response){
         var user = firebase.auth().currentUser;
-
         if (user != null) {
           if( ionic.Platform.isAndroid() || ionic.Platform.isIOS()) {
-            loggedInUser = {
+            User = {
               'email': user.email,
               'userId': user.uid,
               'name': user.displayName,
@@ -485,27 +434,27 @@ angular.module('starter.controllers', [])
             };
           }
           else {
-            loggedInUser = {
+            User = {
               'email': user.email,
               'userId': user.uid,
               'name': user.displayName,
               'picture': user.photoURL
             };
           }
+        } else {
+          $ionicLoading.hide()
         }
-        // var newUser = dataService.getUserDetails(loggedInUser.userId);
-        // if (newUser == null) {
-        //   dataService.emailSignUp(loggedInUser.userId, loggedInUser);
-        // }
+        var newUser = firebaseDataService.getUserDetails(firebase.auth().currentUser.uid);
+        if (newUser == null) {
+          firebaseDataService.emailSignUp(User.userId, User);
+        }
+        $rootScope.$broadcast('user: loggedIn');
+        localforage.setItem('currentUser', User).then(function () {
+          console.log("Saved to LocalForage")
+        });
 
-        // loggedIn.signInData = loggedInUser;
-
-        // $rootScope.$broadcast('user: loggedIn');
-
-        // localStorageService.set('loggedInUser', loggedInUser);
-
-        // console.log(loggedInUser);
-        // $ionicLoading.hide();
+        console.log(User);
+        $ionicLoading.hide();
         // if($stateParams.prevState){
         //   $state.go($stateParams.prevState);
         // }
@@ -514,8 +463,8 @@ angular.module('starter.controllers', [])
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        $ionicLoading.hide()
       });
-      // });
     };
 
 //This method is executed when the user press the "forgot password" link
@@ -567,34 +516,6 @@ angular.module('starter.controllers', [])
       });
     };
 
-    // A confirm dialog
-    // $scope.showConfirm = function() {
-    // 	var confirmPopup = $ionicPopup.confirm({
-    // 		title: 'Create a new Password',
-    // 		template: 'Are you sure you want to eat this ice cream?'
-    // 	});
-    //
-    // 	confirmPopup.then(function(res) {
-    // 		if(res) {
-    // 			console.log('You are sure');
-    // 		} else {
-    // 			console.log('You are not sure');
-    // 		}
-    // 	});
-    // };
-    //
-    // An alert dialog
-    // $scope.showAlert = function() {
-    // 	var alertPopup = $ionicPopup.alert({
-    // 		title: 'Don\'t eat that!',
-    // 		template: 'It might taste good'
-    // 	});
-    //
-    // 	alertPopup.then(function(res) {
-    // 		console.log('Thank you for not eating my delicious ice cream cone');
-    // 	});
-    // };
-
 //This method is executed when the user press the "Dont have an account" link
     ac.createAccount = function () {
       createPopup();
@@ -603,7 +524,7 @@ angular.module('starter.controllers', [])
       var scope = $scope.$new();
       scope.data = {};
       var myPopup = $ionicPopup.show({
-        templateUrl: 'scripts/login/createAccount.html',
+        templateUrl: 'templates/createAccount.html',
         title: 'Create a new account',
         subTitle: 'Signup',
         scope: scope,
@@ -649,7 +570,7 @@ angular.module('starter.controllers', [])
                 console.log("Update Successful");
                 // Update successful.
                 if (user != null) {
-                  loggedInUser = {
+                  User = {
                     'email': user.email,
                     'userId': user.uid,
                     'name': user.displayName,
@@ -660,13 +581,13 @@ angular.module('starter.controllers', [])
                     // this value to authenticate with your backend server, if
                     // you have one. Use User.getToken() instead.
                   };
-                  // var newUser = dataService.getUserDetails(loggedInUser.userId);
+                  // var newUser = firebaseDataService.getUserDetails(User.userId);
                   // if(newUser==null){
-                  //   dataService.emailSignUp(loggedInUser.userId, loggedInUser);
+                  //   firebaseDataService.emailSignUp(User.userId, User);
                   // }
-                  // loggedIn.signInData=loggedInUser;
+                  // User.SignInData=currentUser;
                   // $rootScope.$broadcast('user: loggedIn');
-                  // localStorageService.set('loggedInUser', loggedInUser);
+                  // localStorageService.set('currentUser', User);
                   myPopup.close();
                   $ionicLoading.hide();
                   // if($stateParams.prevState){

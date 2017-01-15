@@ -1,51 +1,78 @@
 <ion-view view-title="Your Account">
   <ion-content>
-    <div class="row">
-      <div class="col">
-        <button class="button button-block button-google button-shadow icon-left"
-                ng-click="ac.login()">
-          <i class="icon ion-social-google padding-right-30"></i>
-          Login with Google
-        </button>
+    <md-content>
+      <div class="row">
+        <div class="col">
+          <button class="button button-block button-google button-shadow icon-left"
+                  ng-click="ac.googleLogin()">
+            <i class="icon ion-social-google padding-right-30"></i>
+            Login with Google
+          </button>
+        </div>
       </div>
-    </div>
+      <div class="row">
+        <div class="col">
+          <hr>
+        </div>
+      </div>
+      <form name="loginForm">
+        <div layout-gt-sm="row">
 
-    <div class="list margin-bottom-5">
-      <label class="item item-input item-floating-label border-top-none">
-        <span class="input-label gray">E-mail</span>
-        <input type="email" ng-model="lc.user.email" placeholder="Email">
-      </label>
-      <label class="item item-input item-floating-label">
-        <span class="input-label gray">Password</span>
-        <input type="password" ng-model="lc.user.password" placeholder="Password">
-      </label>
-    </div>
-    <div class="row">
-      <div class="col">
-        <button class="button button-block button-calm margin-0 block-button-maxw"
-                ng-click="lc.emailSignIn()">
-          Login with Email
-        </button>
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>Email</label>
+            <input name="email" ng-model="ac.email" required="" minlength="10" maxlength="100" ng-pattern="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/">
+
+            <div ng-messages="loginForm.email.$error">
+              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                Your email must be between 10 and 100 characters long and look like an e-mail address.
+              </div>
+            </div>
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>Password</label>
+            <input name="password" ng-model="ac.password" required="" minlength="6">
+
+            <div ng-messages="loginForm.password.$error" multiple="" md-auto-hide="true">
+              <div ng-message="required">
+                Password is required!
+              </div>
+
+              <div ng-message="minlength">
+                Your Password must be between 6 to 50 characters
+              </div>
+            </div>
+          </md-input-container>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col">
+          <button class="button button-block button-calm margin-0 block-button-maxw"
+                  ng-disabled="!loginForm.$valid"
+                  ng-click="ac.emailLogin()">
+            Login with Email
+          </button>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <hr>
+      <md-divider></md-divider>
+      <div class="row">
+        <div class="col">
+          <button class="button button-block button-outline button-calm margin-0 block-button-maxw"
+                  ng-click="ac.createAccount()">
+            Sign up
+          </button>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <button class="button button-block button-outline button-calm margin-0 block-button-maxw"
-                ng-click="lc.createAccount()">
-          Sign up
-        </button>
+      <div class="row">
+        <div class="col text-center gray">
+          By logging into your account, you agree to our Terms and Conditions, Privacy Policy and Cookie Policy
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col text-center gray">
-        By logging into your account, you agree to our Terms and Conditions, Privacy Policy and Cookie Policy
-      </div>
-    </div>
+    </md-content>
   </ion-content>
 </ion-view>
 

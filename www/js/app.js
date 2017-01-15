@@ -23,7 +23,8 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, ionGalleryConfigProvider, $mdGestureProvider, $mdIconProvider, ChartJsProvider) {
+.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, ionGalleryConfigProvider,
+                 $mdGestureProvider, $mdIconProvider, ChartJsProvider) {
   // Configure a dark theme with primary foreground yellow
 
   ChartJsProvider.setOptions({
