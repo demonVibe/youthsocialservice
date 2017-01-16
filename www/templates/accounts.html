@@ -1,5 +1,6 @@
 <ion-view view-title="Your Account">
   <ion-content>
+    <md-progress-linear md-mode="indeterminate" ng-if="ac.loading"></md-progress-linear>
     <md-content>
       <div class="row">
         <div class="col">
@@ -61,8 +62,7 @@
       <md-divider></md-divider>
       <div class="row">
         <div class="col">
-          <button class="button button-block button-outline button-calm margin-0 block-button-maxw"
-                  ng-click="ac.showDialog($event)">
+          <button class="button button-block button-outline button-calm margin-0 block-button-maxw" ng-click="ac.showDialog($event)"> <!--ng-click="ac.createAccount()">-->
             Sign up
           </button>
         </div>

@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.controllers', 'starter.services',
   'firebase', 'ion-gallery', 'material.svgAssetsCache', 'chart.js', 'jkAngularCarousel'])
-  
+
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -53,7 +53,7 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
+    controller: 'AppCtrl as app'
   })
   .state('app.home', {
     url: '/home',

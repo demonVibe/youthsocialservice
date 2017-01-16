@@ -2,8 +2,41 @@
   'use strict';
 
   angular.module('starter.controllers', [])
-  .controller('AppCtrl', function ($scope, $timeout, $log, $ionicModal, $ionicSideMenuDelegate) {
+  .controller('AppCtrl', function ($scope, $timeout, $log, $ionicModal, $ionicSideMenuDelegate, User) {
 
+    var app = angular.extend( this, {
+      userLoggedIn: false,
+      userInfo:{}
+    });
+    activate();
+
+    function activate() {
+      localforage.getItem('currentUser').then(function (data) {
+        if (data) {
+          User=data;
+        } else {
+          User={}
+        }
+        if(!(_.isEmpty(User))){
+          console.log("Not Empty");
+          $timeout(function() {
+            app.userLoggedIn=true;
+            app.userInfo=User
+          }, 10);
+        }
+        else {
+          console.log("not logged In");
+        }
+      }).catch(function (err) {
+        console.log(err)
+      });
+    }
+
+    $scope.$on('user: loggedIn', function() {
+      console.log('got it');
+      app.userLoggedIn=true;
+      app.userInfo=User;
+    });
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
@@ -16,8 +49,11 @@
       $log.debug("app closed");
     };
 
-    $scope.closeSideMenu = function () {
+    $scope.closeSideMenu = function (data) {
       $ionicSideMenuDelegate.toggleLeft();
+      if(data==='logout'){
+        console.log('logout')
+      }
     }
   })
   .controller('HomeCtrl', function ($firebaseArray, events) {
@@ -55,11 +91,11 @@
       showPastBlock: showPastBlock,
       events:[],
       upcomingEvents:[],
-      pastEvents:[]
+      pastEvents:[],
+      response:response,
     });
     var currentDate=new Date();
     activate();
-
     function activate() {
       events.then(function (data) {
         home.events=data;
@@ -98,11 +134,24 @@
       //   list.$indexFor(id); // returns location in the array
       // });
     }
+    
     function showUpcomingBlock() {
       home.upcoming=true;
     }
     function showPastBlock() {
       home.upcoming=false;
+    }
+    function response(res) {
+      if(!(_.isEmpty(User))){
+        if (res==='sure') {
+            alert('Thanks');
+        } else {
+          alert("We'll miss you!")
+        }
+      }
+      else {
+        alert("You need to login to respond")
+      }
     }
 
   })
@@ -416,10 +465,12 @@
   .controller('AccountsCtrl', AccountsCtrl)
   .controller('PanelCtrl', PanelCtrl);
 
-  function AccountsCtrl ($log, $scope, $rootScope, $ionicLoading, $ionicPopup, $q, User, firebaseDataService, $mdPanel) {
+  function AccountsCtrl ($log, $scope, $rootScope, $ionicLoading, $ionicPopup, $q, User, firebaseDataService,
+                         $mdPanel,$timeout, $state, $stateParams, $ionicHistory) {
     var ac = angular.extend( this, {
       email:"",
       password:"",
+      loading:false,
     });
     activate();
     function activate() {
@@ -431,6 +482,7 @@
       document.addEventListener('deviceready', deviceReady, false);
 
       function deviceReady() {
+        ac.loading=true;
         // I get called when everything's ready for the plugin to be called!
         console.log('Device is ready!');
         window.plugins.googleplus.trySilentLogin(
@@ -445,13 +497,17 @@
           },
           function (msg) {
             alert('error: ' + msg);
+            $timeout(function() {
+              ac.loading=false;
+            }, 10);
           }
         );
       }
     }
     //This method is executed when the user press the "SignIn with Email" link
     ac.emailLogin = function () {
-      $ionicLoading.show();
+      // $ionicLoading.show();
+      ac.loading=true;
       firebase.auth().signInWithEmailAndPassword(ac.email, ac.password).then(function(response){
         var user = firebase.auth().currentUser;
         if (user != null) {
@@ -477,7 +533,10 @@
             };
           }
         } else {
-          $ionicLoading.hide()
+          $timeout(function() {
+            ac.loading=false;
+          }, 10);
+          // $ionicLoading.hide()
         }
         var newUser = firebaseDataService.getUserDetails(firebase.auth().currentUser.uid);
         if (newUser == null) {
@@ -487,18 +546,29 @@
         localforage.setItem('currentUser', User).then(function () {
           console.log("Saved to LocalForage")
         });
-
+        $timeout(function() {
+          ac.loading=false;
+        }, 10);
         console.log(User);
-        $ionicLoading.hide();
-        // if($stateParams.prevState){
-        //   $state.go($stateParams.prevState);
-        // }
+        // $ionicLoading.hide();
+        $ionicHistory.nextViewOptions({
+          disableBack: true
+        });
+        if($stateParams.prevState){
+          $state.go($stateParams.prevState);
+        } else {
+          $state.go('app.home')
+        }
       },function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode, errorMessage);
-        $ionicLoading.hide()
+        alert(errorMessage);
+        $timeout(function() {
+          ac.loading=false;
+        }, 10);
+        // $ionicLoading.hide()
       });
     };
 
@@ -695,23 +765,97 @@
     this._mdPanel.open(config);
   };
 
-  function PanelCtrl(mdPanelRef) {
+  function PanelCtrl(mdPanelRef, User, firebaseDataService, $rootScope, $timeout, $stateParams, $state) {
     var pc = angular.extend( this, {
       email:"",
       password:"",
-      repassword:"",
+      // repassword:"",
+      loading:false,
     });
 
-    pc.compare = function (repass) {
-      // if(repass.length>5){
-        pc.isconfirm = pc.password == repass ? true : false;
-      // }
-    }
+    // pc.compare = function (repass) {
+    //   if(repass.length>5){
+    //     pc.isconfirm = pc.password == repass ? true : false;
+    //   }
+    // }
 
     this._mdPanelRef = mdPanelRef;
-    this.closeDialog = function() {
-      console.log("here")
+    pc.closeDialog = function() {
       this._mdPanelRef && this._mdPanelRef.close();
+    };
+    pc.createAccount=function() {
+      pc.loading=true;
+      // $ionicLoading.show();
+      // var info = $q.defer();
+      firebase.auth().createUserWithEmailAndPassword(pc.email, pc.password).then(function (response) {
+          // info.resolve(response);
+          var user = firebase.auth().currentUser;
+
+          // user.updateProfile({
+          //   displayName: scope.data.name,
+          //   photoURL: "https://dl.dropbox.com/s/4tdz2fuzfcr29t6/avatar.png?dl=1"
+          // }).then(function() {
+          //   console.log("Update Successful");
+          // Update successful.
+          if (user != null) {
+            User = {
+              'email': user.email,
+              'userId': user.uid,
+              // 'name': user.displayName,
+              'picture': user.photoURL,
+              // 'device_token': $rootScope.device_token
+
+              // The user's ID, unique to the Firebase project. Do NOT use
+              // this value to authenticate with your backend server, if
+              // you have one. Use User.getToken() instead.
+            };
+            var newUser = firebaseDataService.getUserDetails(User.userId);
+            if(newUser==null){
+              firebaseDataService.emailSignUp(User.userId, User);
+            }
+            // User.SignInData=currentUser;
+            $rootScope.$broadcast('user: loggedIn');
+            // localStorageService.set('currentUser', User);
+            // myPopup.close();
+            localforage.setItem('currentUser', User).then(function () {
+              console.log("Saved to LocalForage",User)
+            });
+            pc.closeDialog();
+            $timeout(function() {
+              pc.loading=false;
+            }, 10);
+            // $ionicLoading.hide();
+            $ionicHistory.nextViewOptions({
+              disableBack: true
+            });
+            if($stateParams.prevState){
+              $state.go($stateParams.prevState);
+            } else {
+              $state.go('app.home');
+            }
+            // return scope.data;
+          } else {
+            console.log("user is null");
+            $timeout(function() {
+              pc.loading=false;
+            }, 10);
+          }
+        },
+        function (error) {
+          // info.reject(error);
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          console.log("ErrorCode: ",errorCode);
+          console.log("ErrorMessage: ", errorMessage);
+          // ...
+          // $ionicLoading.hide();
+          $timeout(function() {
+            pc.loading=false;
+          }, 10);
+          alert(errorMessage);
+        }
+      );
+      // return info.promise;
     };
   }
 })();

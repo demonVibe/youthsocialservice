@@ -1,9 +1,10 @@
-<div role="dialog" aria-label="Creat Your Account" layout="column" layout-align="center center">
+<div role="dialog" aria-label="Create Your Account" layout="column">
   <md-toolbar>
     <div class="md-toolbar-tools">
       <h2>Create Your Account!</h2>
     </div>
   </md-toolbar>
+  <md-progress-linear md-mode="indeterminate" ng-if="pc.loading"></md-progress-linear>
   <md-content layout-padding="">
     <form name="signupForm">
       <div layout-gt-sm="row">
@@ -25,7 +26,7 @@
 
         <md-input-container class="md-block" flex-gt-sm="">
           <label>Password</label>
-          <input type="password" name="password" ng-model="pc.password" required="" minlength="6" ng-keyup="pc.recompare(pc.password)">
+          <input type="password" name="password" ng-model="pc.password" required="" minlength="6">
 
           <div ng-messages="signupForm.password.$error" multiple="" md-auto-hide="true">
             <div ng-message="required">
@@ -38,23 +39,23 @@
           </div>
         </md-input-container>
 
-        <div flex="5" hide-xs="" hide-sm="">
-          <!-- Spacer //-->
-        </div>
+        <!--<div flex="5" hide-xs="" hide-sm="">-->
+          <!--&lt;!&ndash; Spacer //&ndash;&gt;-->
+        <!--</div>-->
 
-        <md-input-container class="md-block" flex-gt-sm="">
-          <label>Confirm Password</label>
-          <input type="password" name="repassword" ng-model="pc.repassword" required="" minlength="6" ng-keyup="pc.compare(pc.repassword)">
+        <!--<md-input-container class="md-block" flex-gt-sm="">-->
+          <!--<label>Confirm Password</label>-->
+          <!--<input type="password" name="repassword" ng-model="pc.repassword" required="" minlength="6" ng-keyup="pc.compare(pc.repassword)">-->
 
-          <div ng-messages="signupForm.repassword.$error" multiple="" md-auto-hide="true">
-            <!--<div ng-message="required">-->
-              <!--Password is required!-->
+          <!--<div ng-messages="signupForm.repassword.$error" multiple="" md-auto-hide="true">-->
+            <!--&lt;!&ndash;<div ng-message="required">&ndash;&gt;-->
+              <!--&lt;!&ndash;Password is required!&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--<div ng-show="pc.isconfirm === false">-->
+              <!--Password mismatch-->
             <!--</div>-->
-            <div ng-show="pc.isconfirm === false">
-              Password mismatch
-            </div>
-          </div>
-        </md-input-container>
+          <!--</div>-->
+        <!--</md-input-container>-->
 
         <div flex="5" hide-xs="" hide-sm="">
           <!-- Spacer //-->
@@ -62,8 +63,8 @@
 
         <md-input-container class="md-block" flex-gt-sm="">
           <button class="button button-block button-outline button-calm margin-0 block-button-maxw"
-            ng-disabled="!signupForm.$valid">
-            <!--ng-click="pc.emailLogin()">-->
+            ng-disabled="!signupForm.$valid"
+            ng-click="pc.createAccount()">
             Create Account
           </button>
         </md-input-container>

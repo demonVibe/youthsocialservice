@@ -53,16 +53,16 @@
                 <span class="md-subhead">{{up.date|date:'fullDate'}} at {{up.location}}</span>
               </md-card-title-text>
             </md-card-title>
-            <md-card-actions layout="row" layout-align="start center">
-              <md-card-icon-actions>
-                <md-button class="md-icon-button" aria-label="Favorite">
-                  <md-icon md-svg-icon="img/social-hand-drawn/svg/blogger-draw-logo.svg"></md-icon>
-                </md-button>
-                <md-button class="md-icon-button" aria-label="Share">
-                  <md-icon md-svg-icon="img/social-hand-drawn/svg/devianart-draw-logo.svg"></md-icon>
-                </md-button>
-              </md-card-icon-actions>
-            </md-card-actions>
+            <!--<md-card-actions layout="row" layout-align="start center">-->
+              <!--<md-card-icon-actions>-->
+                <!--<md-button class="md-icon-button" aria-label="Favorite">-->
+                  <!--<md-icon md-svg-icon="img/social-hand-drawn/svg/blogger-draw-logo.svg"></md-icon>-->
+                <!--</md-button>-->
+                <!--<md-button class="md-icon-button" aria-label="Share">-->
+                  <!--<md-icon md-svg-icon="img/social-hand-drawn/svg/devianart-draw-logo.svg"></md-icon>-->
+                <!--</md-button>-->
+              <!--</md-card-icon-actions>-->
+            <!--</md-card-actions>-->
             <md-card-content>
               <p>
                 {{up.description}}
@@ -80,8 +80,8 @@
             </md-card-content>
             <md-card-actions layout="row" layout-align="center center" ng-if="home.upcoming">
               Would you like to attend?
-              <md-button class="md-primary" ng-click="null">Sure</md-button>
-              <md-button class="md-warn" ng-click="null">Nah</md-button>
+              <md-button class="md-primary" ng-click="home.response('sure', up)">Sure</md-button>
+              <md-button class="md-warn" ng-click="home.response('nah', up)">Nah</md-button>
             </md-card-actions>
           </md-card>
         </div>
@@ -100,16 +100,16 @@
                   <span class="md-subhead">{{up.date|date:'fullDate'}} at {{up.location}}</span>
                 </md-card-title-text>
               </md-card-title>
-              <md-card-actions layout="row" layout-align="start center">
-                <md-card-icon-actions>
-                  <md-button class="md-icon-button" aria-label="Favorite">
-                    <md-icon md-svg-icon="img/social-hand-drawn/svg/blogger-draw-logo.svg"></md-icon>
-                  </md-button>
-                  <md-button class="md-icon-button" aria-label="Share">
-                    <md-icon md-svg-icon="img/social-hand-drawn/svg/devianart-draw-logo.svg"></md-icon>
-                  </md-button>
-                </md-card-icon-actions>
-              </md-card-actions>
+              <!--<md-card-actions layout="row" layout-align="start center">-->
+                <!--<md-card-icon-actions>-->
+                  <!--<md-button class="md-icon-button" aria-label="Favorite">-->
+                    <!--<md-icon md-svg-icon="img/social-hand-drawn/svg/blogger-draw-logo.svg"></md-icon>-->
+                  <!--</md-button>-->
+                  <!--<md-button class="md-icon-button" aria-label="Share">-->
+                    <!--<md-icon md-svg-icon="img/social-hand-drawn/svg/devianart-draw-logo.svg"></md-icon>-->
+                  <!--</md-button>-->
+                <!--</md-card-icon-actions>-->
+              <!--</md-card-actions>-->
               <md-card-content>
                 <p>
                   {{up.description}}
@@ -125,11 +125,11 @@
                   </div>
                 </div>
               </md-card-content>
-              <md-card-actions layout="row" layout-align="center center" ng-if="home.upcoming">
-                Would you like to attend?
-                <md-button class="md-primary" ng-click="null">Sure</md-button>
-                <md-button class="md-warn" ng-click="null">Nah</md-button>
-              </md-card-actions>
+              <!--<md-card-actions layout="row" layout-align="center center" ng-if="home.upcoming">-->
+                <!--Would you like to attend?-->
+                <!--<md-button class="md-primary" ng-click="null">Sure</md-button>-->
+                <!--<md-button class="md-warn" ng-click="null">Nah</md-button>-->
+              <!--</md-card-actions>-->
             </md-card>
           </div>
         </div>
