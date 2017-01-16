@@ -109,20 +109,22 @@
         });
       });
 
-      // var eventsRef = firebase.database().ref().child('events').child('-KaTrXP9bbCEJbgh0fwR');
+      var eventsRef = firebase.database().ref().child('events').child('-KacGWfBZ8nHW3IiJ5Y4');
       // eventsRef.update({
       //   "cover":"",
-      //   "title":"Opening Ceremony - Digital classroom",
-      //   "location":"Rajkiya Madhyamik Vidyalaya, Ward No. 5, Sardarsahar (Churu), Rajasthan",
-      //   "date": new Date("January 17, 2017 09:15:00"),
-      //   "description":"Introducing the LAHAR KAKSH That room is student friendly and improving the digital life of students " +
-      //   "and digital classes running on that LAHAR KAKSH (digital room ) in this room one 40 inch led tv and video player and playing " +
-      //   "instruments and learning toys.",
+      //   "title":"Winter Clothes Distribution",
+      //   "location":"Sawai Man Singh Hospital, Jaipur, Rajasthan",
+      //   "date": new Date("October 24, 2016 20:00:00"),
+      //   "description":"आज दिनांक 24/10/2016 को यूथ सोशल सर्विस ऑर्गनायज़ेशन के कार्यकर्ताओं द्वारा सवाई मान सिंह अस्पताल जयपुर के पास बैठे जरूरतमंदो को सर्दियों के कपड़े, कम्बल, टी-शर्ट, शर्ट, जींस,पैंट और महिलाओं को" +
+      //   " सूट,स्वेटर व बच्चों के कपड़ों का वितरण किया गया । जिसमें संस्था के अध्यक्ष मनोज कुमार प्रजापत, कोषाध्यक्ष नीरज शर्मा व मंत्री अभिषेक चौहान तथा कार्यकारिणी सदस्य राजकुमार सोनी, नरेश कुमार,निशान्त शर्मा, मनीष कुमार बेहड्डा, " +
+      //   "शुभम जयसवाल । संस्था के उपाध्यक्ष महेन्द्र बगरिया तथा सोन प्रकाश शर्मा का विशेष योगदान रहा। तथा हमारे संस्थापक सदस्य श्री साँवरमल जी शर्मा, श्री रोहित जी मीना व श्री विक्रम जी व्यास का सायोगदान रहा तथा विशेस योगदान श्री लक्ष्मण जी बंसल का रहा । " +
+      //   "फलस्वरूप बहुत कुछ सीखने को मिला तथा निशक्तो व जरूरतमंदो का अपार प्यार, स्नेह व आशीर्वाद मिला।",
       //   "guests":[
-      //     {'name':'Shri Rahul Kaswan', 'designation':'Member of parliament', 'role': 'Udghatankarta'},
-      //     {'name':'Shri Sushma Pincha', 'designation':'Chairman of Nagar Palika Sardarshahar','role': 'Adhyakshata'},
-      //     {'name':'Shri Laxman Bansal', 'designation':'Social Worker', 'role': 'Bhamashah'},
+      //     // {'name':'Shri Rahul Kaswan', 'designation':'Member of parliament', 'role': 'Udghatankarta'},
+      //     // {'name':'Shri Sushma Pincha', 'designation':'Chairman of Nagar Palika Sardarshahar','role': 'Adhyakshata'},
+      //     // {'name':'Shri Laxman Bansal', 'designation':'Social Worker', 'role': 'Bhamashah'},
       //   ],
+      //   "signature":"।। जय श्री श्याम ।।",
       //   "responded": 'false'
       // });
 
@@ -134,7 +136,7 @@
       //   list.$indexFor(id); // returns location in the array
       // });
     }
-    
+
     function showUpcomingBlock() {
       home.upcoming=true;
     }
@@ -197,183 +199,174 @@
       members:[]
     })
   })
-  .controller('MediaCtrl', function () {
+  .controller('MediaCtrl', function (events) {
     var mc = angular.extend( this, {
       members:[],
-      events:[
-        // { pictures:["http://www.wired.com/images_blogs/rawfile/2013/11/offset_WaterHouseMarineImages_62652-2-660x440.jpg"], title: 't1' },
-        // { pictures:["http://www.wired.com/images_blogs/rawfile/2013/11/offset_WaterHouseMarineImages_62652-2-660x440.jpg"], title: 't2' },
-        // { pictures:[], title: 't3' },
-        // { pictures:[], title: 't4' },
-        // { pictures:[], title: 't5' },
-        // { pictures:[], title: 't6' },
-      ]
+      events:[],
+      selectedIndex: 0,
     });
-    mc.events=[
-      {
-        src:'http://www.wired.com/images_blogs/rawfile/2013/11/offset_WaterHouseMarineImages_62652-2-660x440.jpg',
-        sub: 'This is a <b>subtitle</b>'
-      },
-      {
-        src:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg',
-        sub: '' /* Not showed */
-      },
-      {
-        src:'http://www.planwallpaper.com/static/images/bicycle-1280x720.jpg',
-        thumb:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg'
-      }
-    ];
-    mc.tabs = [
-        { title: 'One', content: "Tabs will become paginated if there isn't enough room for them.", events: [
-          {
-            src:'http://www.wired.com/images_blogs/rawfile/2013/11/offset_WaterHouseMarineImages_62652-2-660x440.jpg',
-            sub: 'This is a <b>subtitle</b>'
-          },
-          {
-            src:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg',
-            sub: '' /* Not showed */
-          },
-          {
-            src:'http://www.planwallpaper.com/static/images/bicycle-1280x720.jpg',
-            thumb:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg'
-          }
-        ]},
-        { title: 'Two', content: "You can swipe left and right on a mobile device to change tabs.", events: [
-          {
-            src:'http://www.planwallpaper.com/static/images/6783068-cool-wallpapers-hd.jpg',
-            sub: 'This is a <b>subtitle</b>'
-          },
-          {
-            src:'http://www.planwallpaper.com/static/images/cool_eyes_cat_3d_wallpapers_hd.jpg',
-            sub: '' /* Not showed */
-          },
-          {
-            src:'http://www.planwallpaper.com/static/images/cool-hd-apple-desktop-full-hd-city.jpg',
-            thumb:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg'
-          }
-        ]},
-        { title: 'Three', content: "You can bind the selected tab via the selected attribute on the md-tabs element.", events: [
-          {
-            src:'http://www.planwallpaper.com/static/images/Cool-HD-Wallpapers-1_9j9pfu8.jpg',
-            sub: 'This is a <b>subtitle</b>'
-          },
-          {
-            src:'http://www.planwallpaper.com/static/images/full-hd-tv-882332.jpg',
-            sub: 'This is a <b>subtitle</b>'
-          },
-          {
-            src:'http://www.planwallpaper.com/static/images/eyes-3d-cool-hd-wallpapers-fullscreen-background.jpg',
-            sub: 'This is a <b>subtitle</b>'
-          },
-          {
-            src:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg',
-            sub: '' /* Not showed */
-          },
-          {
-            src:'http://www.planwallpaper.com/static/images/cool-wallpaper-8.jpg',
-            thumb:'http://www.planwallpaper.com/static/images/cool-wallpaper-8.jpg'
-          }
-        ]},
-        { title: 'Four', content: "If you set the selected tab binding to -1, it will leave no tab selected.", events: [
-          {
-            src:'http://www.wired.com/images_blogs/rawfile/2013/11/offset_WaterHouseMarineImages_62652-2-660x440.jpg',
-            sub: 'This is a <b>subtitle</b>'
-          },
-          {
-            src:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg',
-            sub: '' /* Not showed */
-          },
-          {
-            src:'http://www.planwallpaper.com/static/images/bicycle-1280x720.jpg',
-            thumb:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg'
-          }
-        ]},
-        { title: 'Five', content: "If you remove a tab, it will try to select a new one.", events: [
-          {
-            src:'http://www.wired.com/images_blogs/rawfile/2013/11/offset_WaterHouseMarineImages_62652-2-660x440.jpg',
-            sub: 'This is a <b>subtitle</b>'
-          },
-          {
-            src:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg',
-            sub: '' /* Not showed */
-          },
-          {
-            src:'http://www.planwallpaper.com/static/images/bicycle-1280x720.jpg',
-            thumb:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg'
-          }
-        ]},
-        { title: 'Six', content: "There's an ink bar that follows the selected tab, you can turn it off if you want.", events: [
-          {
-            src:'http://www.wired.com/images_blogs/rawfile/2013/11/offset_WaterHouseMarineImages_62652-2-660x440.jpg',
-            sub: 'This is a <b>subtitle</b>'
-          },
-          {
-            src:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg',
-            sub: '' /* Not showed */
-          },
-          {
-            src:'http://www.planwallpaper.com/static/images/bicycle-1280x720.jpg',
-            thumb:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg'
-          }
-        ]},
-        { title: 'Seven', content: "If you set ng-disabled on a tab, it becomes unselectable. If the currently selected tab becomes disabled, it will try to select the next tab.", events: [
-          {
-            src:'http://www.wired.com/images_blogs/rawfile/2013/11/offset_WaterHouseMarineImages_62652-2-660x440.jpg',
-            sub: 'This is a <b>subtitle</b>'
-          },
-          {
-            src:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg',
-            sub: '' /* Not showed */
-          },
-          {
-            src:'http://www.planwallpaper.com/static/images/bicycle-1280x720.jpg',
-            thumb:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg'
-          }
-        ]},
-        { title: 'Eight', content: "If you look at the source, you're using tabs to look at a demo for tabs. Recursion!", events: [
-          {
-            src:'http://www.wired.com/images_blogs/rawfile/2013/11/offset_WaterHouseMarineImages_62652-2-660x440.jpg',
-            sub: 'This is a <b>subtitle</b>'
-          },
-          {
-            src:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg',
-            sub: '' /* Not showed */
-          },
-          {
-            src:'http://www.planwallpaper.com/static/images/bicycle-1280x720.jpg',
-            thumb:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg'
-          }
-        ]},
-        { title: 'Nine', content: "If you set md-theme=\"green\" on the md-tabs element, you'll get green tabs.", events: [
-          {
-            src:'http://www.wired.com/images_blogs/rawfile/2013/11/offset_WaterHouseMarineImages_62652-2-660x440.jpg',
-            sub: 'This is a <b>subtitle</b>'
-          },
-          {
-            src:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg',
-            sub: '' /* Not showed */
-          },
-          {
-            src:'http://www.planwallpaper.com/static/images/bicycle-1280x720.jpg',
-            thumb:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg'
-          }
-        ]},
-        { title: 'Ten', content: "If you're still reading this, you should just go check out the API docs for tabs!", events: [
-          {
-            src:'http://www.wired.com/images_blogs/rawfile/2013/11/offset_WaterHouseMarineImages_62652-2-660x440.jpg',
-            sub: 'This is a <b>subtitle</b>'
-          },
-          {
-            src:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg',
-            sub: '' /* Not showed */
-          },
-          {
-            src:'http://www.planwallpaper.com/static/images/bicycle-1280x720.jpg',
-            thumb:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg'
-          }
-        ]}
-      ];
-    mc.selectedIndex = 0;
+    var currentDate= new Date();
+    events.then(function (data) {
+      _.forEach(data,function (val) {
+        // console.log(new Date(val.date), currentDate)
+        if(new Date(val.date)> currentDate){
+          // home.upcomingEvents.push(val);
+        } else {
+          mc.events.push(val);
+        }
+      });
+      // console.log(mc.events)
+      // {
+      //   src:'http://www.planwallpaper.com/static/images/bicycle-1280x720.jpg',
+      //   thumb:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg',
+      //   sub: 'This is a <b>subtitle</b>'
+      // }
+      // [
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(1).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(1).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(2).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(2).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(3).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(3).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(4).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(4).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(5).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(5).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(6).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(6).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(7).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(7).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(8).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(8).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(9).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(9).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(10).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(10).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(11).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(11).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(12).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(12).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(13).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(13).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(14).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(14).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(15).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(15).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(16).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(16).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(17).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(17).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(18).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(18).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(19).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(19).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(20).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(20).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(21).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(21).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(22).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(22).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(23).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(23).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(24).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(24).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   },
+      //   {
+      //     src:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_picture%20(25).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     thumb:"https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Events%2FPictures%2Fgallery%2F241016_thumb%20(25).jpg?alt=media&token=62447bd7-8544-46f7-a5c2-d755381e8b93",
+      //     sub:""
+      //   }
+      // ]
+    });
+    // mc.tabs = [
+    //     { title: 'One', content: "Tabs will become paginated if there isn't enough room for them.", events: [
+    //       {
+    //         src:'http://www.wired.com/images_blogs/rawfile/2013/11/offset_WaterHouseMarineImages_62652-2-660x440.jpg',
+    //         sub: 'This is a <b>subtitle</b>'
+    //       },
+    //       {
+    //         src:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg',
+    //         sub: '' /* Not showed */
+    //       },
+    //       {
+    //         src:'http://www.planwallpaper.com/static/images/bicycle-1280x720.jpg',
+    //         thumb:'http://www.gettyimages.co.uk/CMS/StaticContent/1391099215267_hero2.jpg'
+    //       }
+    //     ]},
+    //   ];
+
+
     // $scope.$watch('selectedIndex', function(current, old){
     //   previous = selected;
     //   selected = tabs[current];

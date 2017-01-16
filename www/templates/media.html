@@ -11,10 +11,10 @@
         <md-content class="md-padding">
           <!--<h1 class="md-display-2">Event Pictures</h1>-->
           <md-tabs md-selected="mc.selectedIndex" md-autoselect="">
-            <md-tab ng-repeat="tab in mc.tabs" ng-disabled="tab.disabled" label="{{tab.title}}">
-              <ion-gallery ion-gallery-items="tab.events"></ion-gallery>
+            <md-tab ng-repeat="event in mc.events" ng-disabled="event.disabled" label="{{event.title}}">
+              <ion-gallery ion-gallery-items="event.pictures"></ion-gallery>
               <div style="padding: 25px; text-align: center;">
-                <div ng-bind="tab.content"></div>
+                <div ng-bind="event.content"></div>
               </div>
             </md-tab>
           </md-tabs>
@@ -38,8 +38,7 @@
       </md-tab>
       <md-tab label="Videos">
         <md-content class="md-padding">
-          <h1 class="md-display-2">Tab Three</h1>
-          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+          <h2 class="md-display-2">No videos yet</h2>
         </md-content>
       </md-tab>
     </md-tabs>

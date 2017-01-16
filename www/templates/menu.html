@@ -13,11 +13,11 @@
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
-    <ion-header-bar class="bar-royal" ui-sref="app.home">
-      <h1 class="title">[Y2S]</h1>
+    <ion-header-bar class="bar-royal" ui-sref="app.home" ng-click="closeSideMenu()">
+      <h1 class="title">Home</h1>
     </ion-header-bar>
     <ion-content>
-      <md-content layout-padding="" layout-align="top center">
+      <md-content layout-align="top center">
         <md-card ng-if="app.userLoggedIn">
           <md-card-title>
             <md-card-title-text>
@@ -45,15 +45,15 @@
           <md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Our Impact" ui-sref="app.ourimpact">
             Our Impact
           </md-list-item>
-          <md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Media" ui-sref="app.media">
-            Media
-          </md-list-item>
+          <!--<md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Media" ui-sref="app.media">-->
+            <!--Media-->
+          <!--</md-list-item>-->
           <md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Our Story" ui-sref="app.ourstory">
             Our Story
           </md-list-item>
-          <md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Join The Movement" ui-sref="app.join">
-            Join The Movement
-          </md-list-item>
+          <!--<md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Join The Movement" ui-sref="app.join">-->
+            <!--Join The Movement-->
+          <!--</md-list-item>-->
           <md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Contact Us" ui-sref="app.contact">
             Contact Us
           </md-list-item>
@@ -64,7 +64,7 @@
             <!--Donate-->
           <!--</md-list-item>-->
           <md-list-item ng-if="!app.userLoggedIn" class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Your Account" ui-sref="app.accounts">
-            Login
+            Login/Signup
           </md-list-item>
           <md-list-item ng-if="app.userLoggedIn" class="md-list-item-text" ng-click="closeSideMenu('logout')" aria-label="Log out" ui-sref="app.home">
             Logout
