@@ -5,7 +5,6 @@ node_modules/
 platforms/
 plugins/
 www/components/
-.bowerrc
 .idea
 hooks
 node_modules

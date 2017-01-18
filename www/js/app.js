@@ -154,15 +154,6 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
       }
     }
   })
-  // .state('app.signup', {
-  //   url: '/signup',
-  //   views: {
-  //     'menuContent': {
-  //       templateUrl: 'templates/email-signup.html',
-  //       controller: 'PanelCtrl as ctrl'
-  //     }
-  //   }
-  // })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
 })

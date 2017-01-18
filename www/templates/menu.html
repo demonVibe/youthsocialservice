@@ -19,17 +19,22 @@
     <ion-content>
       <md-content layout-align="top center">
         <md-card ng-if="app.userLoggedIn">
-          <md-card-title>
-            <md-card-title-text>
-              <span class="md-headline">{{app.userInfo.name}}</span>
-              <span class="md-subhead">{{app.userInfo.email}}</span>
-            </md-card-title-text>
-            <md-card-title-media>
-              <div class="md-media-sm card-media">
-                <!--<img ng-src="{{app.userInfo.picture}}">-->
-              </div>
-            </md-card-title-media>
-          </md-card-title>
+          <ion-item class="item-thumbnail-left" ng-if="vm.status.id">
+            <img ng-src="{{app.userInfo.picture}}">
+            <h2>{{app.userInfo.name}}</h2>
+            <p>{{app.userInfo.email}}</p>
+          </ion-item>
+          <!--<md-card-title>-->
+            <!--<md-card-title-text>-->
+              <!--<span class="md-headline">{{app.userInfo.name}}</span>-->
+              <!--<span class="md-subhead">{{app.userInfo.email}}</span>-->
+            <!--</md-card-title-text>-->
+            <!--<md-card-title-media>-->
+              <!--<div class="md-media-sm card-media">-->
+                <!--&lt;!&ndash;<img ng-src="{{app.userInfo.picture}}">&ndash;&gt;-->
+              <!--</div>-->
+            <!--</md-card-title-media>-->
+          <!--</md-card-title>-->
           <!--<md-card-actions layout="row" layout-align="end center">-->
             <!--<md-button>Action 1</md-button>-->
             <!--<md-button>Action 2</md-button>-->
@@ -45,24 +50,24 @@
           <md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Our Impact" ui-sref="app.ourimpact">
             Our Impact
           </md-list-item>
-          <!--<md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Media" ui-sref="app.media">-->
-            <!--Media-->
-          <!--</md-list-item>-->
+          <md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Media" ui-sref="app.media">
+            Media
+          </md-list-item>
           <md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Our Story" ui-sref="app.ourstory">
             Our Story
           </md-list-item>
-          <!--<md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Join The Movement" ui-sref="app.join">-->
-            <!--Join The Movement-->
-          <!--</md-list-item>-->
+          <md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Join The Movement" ui-sref="app.join">
+            Join The Movement
+          </md-list-item>
           <md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Contact Us" ui-sref="app.contact">
             Contact Us
           </md-list-item>
           <!--<md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Share" ui-sref="app.share">-->
             <!--Share-->
           <!--</md-list-item>-->
-          <!--<md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Donate" ui-sref="app.donate">-->
-            <!--Donate-->
-          <!--</md-list-item>-->
+          <md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Donate" ui-sref="app.donate">
+            Donate
+          </md-list-item>
           <md-list-item ng-if="!app.userLoggedIn" class="md-list-item-text" ng-click="closeSideMenu()" aria-label="Your Account" ui-sref="app.accounts">
             Login/Signup
           </md-list-item>
