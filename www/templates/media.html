@@ -12,10 +12,10 @@
           <!--<h1 class="md-display-2">Event Pictures</h1>-->
           <md-tabs md-selected="mc.selectedIndex" md-autoselect="">
             <md-tab ng-repeat="event in mc.events" ng-disabled="event.disabled" label="{{event.title}}">
-              <ion-gallery ion-gallery-items="event.pictures"></ion-gallery>
-              <div style="padding: 25px; text-align: center;">
-                <div ng-bind="event.content"></div>
-              </div>
+                <ion-gallery ion-gallery-items="event.pictures" ng-if="event.pictures"></ion-gallery>
+              <!--<div style="padding: 25px; text-align: center;">-->
+                <!--<div ng-bind="event.content"></div>-->
+              <!--</div>-->
             </md-tab>
           </md-tabs>
 

@@ -85,6 +85,12 @@
               <md-button class="md-warn" ng-click="home.response('nah', up)">Nah</md-button>
             </md-card-actions>
           </md-card>
+          <md-card layout="column" ng-if="!home.upcomingEvents.length">
+            <div style="height: 150px;" layout="column" layout-align="center center">
+              <h3>No Upcoming Events!</h3>
+              <p>Check our Past Events or Suggest an Event</p>
+            </div>
+          </md-card>
         </div>
       </div>
       <div class="row" ng-if="!home.upcoming">
