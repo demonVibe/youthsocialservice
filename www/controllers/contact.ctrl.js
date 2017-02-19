@@ -49,12 +49,12 @@
           direction: "top",
           url: 'https://m.facebook.com/y2s2414/'
         },
-        {
-          name: "Google Plus",
-          icon: "img/social-hand-drawn/svg/google-plus-draw-logo.svg",
-          direction: "bottom",
-          url: 'https://m.facebook.com/y2s2414/'
-        },
+        // {
+        //   name: "Google Plus",
+        //   icon: "img/social-hand-drawn/svg/google-plus-draw-logo.svg",
+        //   direction: "bottom",
+        //   url: 'https://m.facebook.com/y2s2414/'
+        // },
       ];
     })
 

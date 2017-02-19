@@ -11,7 +11,6 @@
     activate();
 
     function activate() {
-      console.log('here');
       if(window.cordova){
         document.addEventListener("deviceready", onDeviceReady, false);
         //noinspection JSAnnotator

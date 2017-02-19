@@ -2,23 +2,22 @@
   <ion-content>
     <md-progress-linear md-mode="indeterminate" ng-if="ac.loading"></md-progress-linear>
     <md-content>
-      <div class="row">
-        <div class="col">
-          <button class="button button-block button-google button-shadow icon-left"
-                  ng-click="ac.googleLogin()">
-            <i class="icon ion-social-google padding-right-30"></i>
-            Login with Google
-          </button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <hr>
-        </div>
-      </div>
+      <!--<div class="row">-->
+      <!--<div class="col">-->
+      <!--<button class="button button-block button-google button-shadow icon-left"-->
+      <!--ng-click="ac.googleLogin()">-->
+      <!--<i class="icon ion-social-google padding-right-30"></i>-->
+      <!--Login with Google-->
+      <!--</button>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--<div class="row">-->
+      <!--<div class="col">-->
+      <!--<hr>-->
+      <!--</div>-->
+      <!--</div>-->
       <form name="loginForm">
         <div layout-gt-sm="row">
-
           <md-input-container class="md-block" flex-gt-sm="">
             <label>Email</label>
             <input name="email" ng-model="ac.email" required="" minlength="10" maxlength="100" ng-pattern="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/">
@@ -29,7 +28,6 @@
               </div>
             </div>
           </md-input-container>
-
           <div flex="5" hide-xs="" hide-sm="">
             <!-- Spacer //-->
           </div>
