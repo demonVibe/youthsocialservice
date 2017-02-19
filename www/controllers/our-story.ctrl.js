@@ -11,5 +11,4 @@
         cover: 'https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/Common%2FOurStoryCover.jpeg?alt=media&token=fbb48f2d-6d0a-4d19-9364-6b84584a8341'
       })
     })
-
 })();
