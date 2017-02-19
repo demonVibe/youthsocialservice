@@ -326,6 +326,7 @@
     });
 
     this._mdPanelRef = mdPanelRef;
+    $ionicLoading.show();
     pc.closeDialog = function () {
       this._mdPanelRef && this._mdPanelRef.close();
     };
