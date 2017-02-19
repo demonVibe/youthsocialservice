@@ -47,7 +47,7 @@
           }
         );
       }
-    }
+    };
     //This method is executed when the user press the "SignIn with Email" link
     ac.emailLogin = function () {
       // $ionicLoading.show();
@@ -273,7 +273,7 @@
 
   AccountsCtrl.prototype.showDialog = function () {
     var position = this._mdPanel.newPanelPosition()
-      .absolute()
+      .absolute();
     // .right()
     // .top('30%')
     // .bottom()
@@ -310,91 +310,148 @@
     this._mdPanel.open(config);
   };
 
-  function PanelCtrl(mdPanelRef, User, firebaseDataService, $rootScope, $timeout, $stateParams, $state, $scope) {
+  function PanelCtrl(mdPanelRef, User, firebaseDataService, $rootScope, $timeout, $stateParams, $state, $scope, $ionicHistory, $ionicLoading) {
     var pc = angular.extend(this, {
       email: "",
       password: "",
-      // repassword:"",
       loading: false,
+      firstName: "",
+      lastName: "",
+      phone: "",
+      dob: null,
+      address1: "",
+      address2: "",
+      city: "",
+      postcode: "",
     });
 
     this._mdPanelRef = mdPanelRef;
+    $ionicLoading.show();
     pc.closeDialog = function () {
       this._mdPanelRef && this._mdPanelRef.close();
     };
     pc.createAccount = function () {
       pc.loading = true;
-      // $ionicLoading.show();
+      if (window.cordova) {
+        $ionicLoading.show();
+        document.addEventListener("deviceready", onDeviceReady, false);
+        //noinspection JSAnnotator
+        function onDeviceReady() {
+          //noinspection JSUnresolvedFunction
+          cordova.plugins.snackbar('Hold on! This may take a while...', 'INDEFINITE', "", function () {
+          });
+        }
+      }
+
       // var info = $q.defer();
+
       firebase.auth().createUserWithEmailAndPassword(pc.email, pc.password).then(function (response) {
-          // info.resolve(response);
-          var user = firebase.auth().currentUser;
+        // info.resolve(response);
+        var user = firebase.auth().currentUser;
+        user.updateProfile({
+          displayName: pc.firstName + "" + pc.lastName,
+          photoURL: "https://dl.dropbox.com/s/4tdz2fuzfcr29t6/avatar.png?dl=1"
+        }).then(function () {
+            console.log("Update Successful");
+            // Update successful.
+            if (user != null) {
+              User.details = {
+                'email': user.email,
+                'userId': user.uid,
+                'name': user.displayName,
+                'picture': user.photoURL,
+                'emailVerified': user.emailVerified,
+                'firstName': pc.firstName,
+                'lastName': pc.lastName,
+                'phone': pc.phone,
+                'dob': pc.dob.toString(),
+                'address1': pc.address1,
+                'address2': pc.address2,
+                'city': pc.city,
+                'postcode': pc.postcode,
+                'role': 'user'
+                // 'device_token': $rootScope.device_token
 
-          // user.updateProfile({
-          //   displayName: scope.data.name,
-          //   photoURL: "https://dl.dropbox.com/s/4tdz2fuzfcr29t6/avatar.png?dl=1"
-          // }).then(function() {
-          //   console.log("Update Successful");
-          // Update successful.
-          if (user != null) {
-            User = {
-              'email': user.email,
-              'userId': user.uid,
-              // 'name': user.displayName,
-              'picture': user.photoURL,
-              // 'device_token': $rootScope.device_token
+                // The user's ID, unique to the Firebase project. Do NOT use
+                // this value to authenticate with your backend server, if
+                // you have one. Use User.getToken() instead.
+              };
+              var newUser = firebaseDataService.getUserDetails(User.details.userId);
+              if (newUser == null) {
+                firebaseDataService.emailSignUp(User.details.userId, User.details);
+              }
 
-              // The user's ID, unique to the Firebase project. Do NOT use
-              // this value to authenticate with your backend server, if
-              // you have one. Use User.getToken() instead.
-            };
-            var newUser = firebaseDataService.getUserDetails(User.userId);
-            if (newUser == null) {
-              firebaseDataService.emailSignUp(User.userId, User);
-            }
-            // User.SignInData=currentUser;
-            $rootScope.$broadcast('user: loggedIn');
-            // localStorageService.set('currentUser', User);
-            // myPopup.close();
-            localforage.setItem('currentUser', User).then(function () {
-              console.log("Saved to LocalForage", User)
-            });
-            pc.closeDialog();
-            $timeout(function () {
-              pc.loading = false;
-            }, 10);
-            // $ionicLoading.hide();
-            $ionicHistory.nextViewOptions({
-              disableBack: true
-            });
-            if ($stateParams.prevState) {
-              $state.go($stateParams.prevState);
+              $rootScope.$broadcast('user: loggedIn');
+              localforage.setItem('currentUser', User.details).then(function () {
+                console.log("Saved to LocalForage", User.details)
+              });
+              if (window.cordova) {
+                //noinspection JSUnresolvedFunction
+                cordova.plugins.snackbar('Congrats! Account created successfully!', 'LONG', "", function () {
+
+                });
+              }
+              pc.closeDialog();
+              $timeout(function () {
+                pc.loading = false;
+              }, 10);
+              $ionicLoading.hide();
+              $ionicHistory.nextViewOptions({
+                disableBack: true
+              });
+              // noinspection JSUnresolvedVariable
+              if ($stateParams.prevState) {
+                //noinspection JSUnresolvedVariable
+                $state.go($stateParams.prevState);
+              } else {
+                $state.go('app.home');
+              }
             } else {
-              $state.go('app.home');
+              console.log("user is null");
+              $timeout(function () {
+                pc.loading = false;
+              }, 10);
             }
-            // return scope.data;
-          } else {
-            console.log("user is null");
+          },
+          function (error) {
+            // info.reject(error);
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log("ErrorCode: ", errorCode);
+            console.log("ErrorMessage: ", errorMessage);
+            if (window.cordova) {
+              $ionicLoading.hide();
+              //noinspection JSUnresolvedFunction
+              cordova.plugins.snackbar(error.message, 'INDEFINITE', "Okay", function () {
+              });
+            } else {
+              alert(errorMessage)
+            }
             $timeout(function () {
               pc.loading = false;
             }, 10);
           }
-        },
-        function (error) {
-          // info.reject(error);
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          console.log("ErrorCode: ", errorCode);
-          console.log("ErrorMessage: ", errorMessage);
-          // ...
-          // $ionicLoading.hide();
-          $timeout(function () {
-            pc.loading = false;
-          }, 10);
-          alert(errorMessage);
+        );
+        // return info.promise;
+      }, function (error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log("ErrorCode: ", errorCode);
+        console.log("ErrorMessage: ", errorMessage);
+        if (window.cordova) {
+          $ionicLoading.hide();
+          //noinspection JSUnresolvedFunction
+          cordova.plugins.snackbar(error.message, 'INDEFINITE', "Okay", function () {
+
+          });
+        } else {
+          alert(errorMessage)
         }
-      );
-      // return info.promise;
-    };
+        $timeout(function () {
+          pc.loading = false;
+        }, 10);
+      });
+
+    }
   }
 })();

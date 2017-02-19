@@ -24,12 +24,17 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
 })
 
 .config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, ionGalleryConfigProvider,
-                 $mdGestureProvider, $mdIconProvider, ChartJsProvider) {
+                 $mdGestureProvider, $mdIconProvider, ChartJsProvider, $ionicConfigProvider) {
   // Configure a dark theme with primary foreground yellow
-
   ChartJsProvider.setOptions({
     colors : [ '#ff6384', '#803690', '#00ADF9', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
   });
+
+  $ionicConfigProvider.views.maxCache(0);
+  $ionicConfigProvider.navBar.alignTitle('left');
+  if (ionic.Platform.isAndroid()) {
+    $ionicConfigProvider.scrolling.jsScrolling(false);
+  }
 
   $mdIconProvider
     .iconSet('social', 'img/icons/sets/social-icons.svg', 24)
@@ -155,5 +160,5 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/donate');
+  $urlRouterProvider.otherwise('/app/home');
 });

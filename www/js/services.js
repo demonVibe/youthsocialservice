@@ -30,7 +30,7 @@
         emailSignUp: emailSignUp,
       };
       ////////////////
-      
+
       function getUserDetails(userId) {
         var ref = db.child('/users/'+ userId);
         ref.on("value", function (snapshot) {
