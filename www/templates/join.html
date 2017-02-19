@@ -26,12 +26,17 @@
             <md-icon md-svg-src="img/icons/ic_place_24px.svg" style="display:inline-block;"></md-icon>
           </md-input-container>
 
-          <md-input-container class="md-icon-float md-icon-right md-block">
-            <label>Donation Amount</label>
-            <md-icon md-svg-src="img/icons/ic_card_giftcard_24px.svg"></md-icon>
-            <input ng-model="user.donation" type="number" step="0.01">
-            <md-icon md-svg-src="img/icons/ic_euro_24px.svg"></md-icon>
+          <md-input-container class="md-block">
+            <label>Why do you want to join us?</label>
+            <textarea ng-model="user.reason" md-maxlength="150" rows="4" md-select-on-focus=""></textarea>
           </md-input-container>
+
+          <!--<md-input-container class="md-icon-float md-icon-right md-block">-->
+          <!--<label>Donation Amount</label>-->
+          <!--<md-icon md-svg-src="img/icons/ic_card_giftcard_24px.svg"></md-icon>-->
+          <!--<input ng-model="user.donation" type="number" step="0.01">-->
+          <!--<md-icon md-svg-src="img/icons/ic_euro_24px.svg"></md-icon>-->
+          <!--</md-input-container>-->
 
         </md-content>
       </div>

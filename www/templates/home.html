@@ -42,7 +42,7 @@
       <md-progress-linear md-mode="indeterminate" ng-if="home.events.length==0"></md-progress-linear>
       <div class="row" ng-if="home.upcoming">
         <div class="col" style="overflow-y:auto; height:500px;">
-          <md-card layout="column" ng-repeat="up in home.upcomingEvents">
+          <md-card layout="column" ng-repeat="up in home.upcomingEvents| orderBy : '-date'">
             <div style="height: 150px;" layout="column" layout-align="center center">
               <img ng-src="{{up.cover||'img/icon-sm.png'}}" class="md-card-image" alt="Washed Out">
             </div>
@@ -85,7 +85,8 @@
               <md-button class="md-warn" ng-click="home.response('nah', up)">Nah</md-button>
             </md-card-actions>
           </md-card>
-          <md-card layout="column" ng-if="!home.upcomingEvents.length">
+          <md-card layout="column" ng-show="home.upcomingEvents.length===0"
+                   ng-hide="!home.events.length|| home.upcomingEvents.length!=0">
             <div style="height: 150px;" layout="column" layout-align="center center">
               <h3>No Upcoming Events!</h3>
               <p>Check our Past Events or Suggest an Event</p>
@@ -96,7 +97,7 @@
       <div class="row" ng-if="!home.upcoming">
         <div class="col">
           <div style="overflow-y:auto; height:500px;">
-            <md-card layout="column" ng-repeat="past in home.pastEvents">
+            <md-card layout="column" ng-repeat="past in home.pastEvents| orderBy : '-date'">
               <div style="height: 150px;" layout="column" layout-align="center center">
                 <img ng-src="{{past.cover||'img/icon-sm.png'}}" class="md-card-image" alt="Washed Out">
               </div>

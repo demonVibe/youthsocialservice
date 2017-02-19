@@ -55,7 +55,8 @@
 
             <md-input-container class="md-block" flex-gt-sm="">
               <label>Postal Code</label>
-              <input name="postalCode" ng-model="user.postalCode" placeholder="12345" required="" ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+              <input name="postalCode" ng-model="user.postalCode" placeholder="123456" required=""
+                     ng-pattern="/^[0-9]{6}$/" md-maxlength="6">
 
               <div ng-messages="userForm.postalCode.$error" role="alert" multiple="">
                 <div ng-message="required" class="my-message">You must supply a postal code.</div>
@@ -69,10 +70,11 @@
             </md-input-container>
           </div>
 
-          <md-input-container class="md-block">
-            <label>Biography</label>
-            <textarea ng-model="user.biography" md-maxlength="150" rows="5" md-select-on-focus=""></textarea>
+          <md-input-container md-no-float="" class="md-block">
+            <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
+            <input ng-model="user.phone" type="text" placeholder="Phone Number">
           </md-input-container>
+
           <md-input-container class="md-block" flex-gt-sm="">
             <label>Email</label>
             <input name="email" ng-model="pc.email" required="" minlength="10" maxlength="100" ng-pattern="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/">
@@ -101,24 +103,6 @@
               </div>
             </div>
           </md-input-container>
-
-          <!--<div flex="5" hide-xs="" hide-sm="">-->
-          <!--&lt;!&ndash; Spacer //&ndash;&gt;-->
-          <!--</div>-->
-
-          <!--<md-input-container class="md-block" flex-gt-sm="">-->
-          <!--<label>Confirm Password</label>-->
-          <!--<input type="password" name="repassword" ng-model="pc.repassword" required="" minlength="6" ng-keyup="pc.compare(pc.repassword)">-->
-
-          <!--<div ng-messages="signupForm.repassword.$error" multiple="" md-auto-hide="true">-->
-          <!--&lt;!&ndash;<div ng-message="required">&ndash;&gt;-->
-          <!--&lt;!&ndash;Password is required!&ndash;&gt;-->
-          <!--&lt;!&ndash;</div>&ndash;&gt;-->
-          <!--<div ng-show="pc.isconfirm === false">-->
-          <!--Password mismatch-->
-          <!--</div>-->
-          <!--</div>-->
-          <!--</md-input-container>-->
 
           <div flex="5" hide-xs="" hide-sm="">
             <!-- Spacer //-->
