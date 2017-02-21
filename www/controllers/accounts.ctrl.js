@@ -326,7 +326,6 @@
     });
 
     this._mdPanelRef = mdPanelRef;
-    $ionicLoading.show();
     pc.closeDialog = function () {
       this._mdPanelRef && this._mdPanelRef.close();
     };
@@ -395,7 +394,6 @@
               $timeout(function () {
                 pc.loading = false;
               }, 10);
-              $ionicLoading.hide();
               $ionicHistory.nextViewOptions({
                 disableBack: true
               });
