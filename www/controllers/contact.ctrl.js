@@ -44,7 +44,7 @@
           name: "Instagram",
           icon: "img/social-hand-drawn/svg/instagram-draw-logo.svg",
           direction: "bottom",
-          url: 'https://m.facebook.com/y2s2414/'
+          url: 'http://instagram.com/youth_social_service_ngo'
         },
         {
           name: "Facebook",
