@@ -10,7 +10,7 @@ hooks
 node_modules
 plugins
 res
-resources/android
+resources/android/
 resources/ios/
 scss
 www/lib/
