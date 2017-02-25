@@ -283,11 +283,11 @@
 
     animation.openFrom({
       top: document.documentElement.clientHeight,
-      left: document.documentElement.clientWidth / 2 - 250
+      left: document.documentElement.clientWidth / 2 - 450
     });
     animation.closeTo({
       top: document.documentElement.clientHeight,
-      left: document.documentElement.clientWidth / 2 - 250
+      left: document.documentElement.clientWidth / 2 - 450
     });
     animation.withAnimation(this._mdPanel.animation.SLIDE);
 

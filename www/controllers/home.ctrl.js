@@ -7,21 +7,21 @@
   angular.module('starter.controllers')
     .controller('HomeCtrl', function ($firebaseArray, events, $timeout) {
       var home = angular.extend(this, {
-        members: [
+        founders: [
           {
-            image: 'http://lorempixel.com/200/200/people'
+            image: 'http://lorempixel.com/400/300/people'
           },
           {
-            image: 'http://lorempixel.com/200/200/food'
+            image: 'http://lorempixel.com/400/300/food'
           },
           {
-            image: 'http://lorempixel.com/200/200/sports'
+            image: 'http://lorempixel.com/400/300/sports'
           },
           {
-            image: 'http://lorempixel.com/200/200/'
+            image: 'http://lorempixel.com/400/300/'
           }
         ],
-        founders: [
+        members: [
           {
             image: 'http://lorempixel.com/200/200/'
           },

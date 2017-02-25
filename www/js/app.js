@@ -7,7 +7,7 @@
 angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.controllers', 'starter.services',
   'firebase', 'ion-gallery', 'material.svgAssetsCache', 'chart.js', 'jkAngularCarousel'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $ionicPopup) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -21,6 +21,20 @@ angular.module('starter', ['ionic', 'ngMaterial', 'ngMessages', 'starter.control
       StatusBar.styleDefault();
     }
   });
+  $ionicPlatform.registerBackButtonAction(function(event) {
+    if (true) { // your check here
+      // cordova.plugins.snackbar('Tap back again to exit', 'SHORT', "", function () {
+      //     });
+      $ionicPopup.confirm({
+        title: 'Confirm Exit',
+        template: 'Do you really want to exit?'
+      }).then(function(res) {
+        if (res) {
+          ionic.Platform.exitApp();
+        }
+      })
+    }
+  }, 100);
 })
 
 .config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, ionGalleryConfigProvider,
