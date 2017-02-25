@@ -8,9 +8,10 @@ www/components/
 .idea
 hooks
 node_modules
-platforms
 plugins
 res
+resources/android
+resources/ios/
 scss
 www/lib/
 www.zip
