@@ -32,14 +32,10 @@
             </div>
             <div class="row" style="text-align: center">
               <div class="col">
-                Youth social service organisation,
-                Shop no. 05, Bhatiwal complex,
-                Ram Nagar, Sardarshahar
+                Youth social service organisation, Shop no. 05, Bhatiwal complex, Ram Nagar, Sardarshahar
               </div>
               <div class="col">
-                B-11/3, Chinab Apartment
-                Sector-28, Pratap Nagar,
-                Jaipur, Rajasthan
+                B-11/3, Chinab Apartment Sector-28, Pratap Nagar, Jaipur, Rajasthan
               </div>
             </div>
             <div class="row" style="text-align: center">
@@ -53,35 +49,23 @@
           </div>
         </div>
       </div>
-      <div style="height: 120px;">
-        <md-fab-speed-dial
-          ng-hide="cc.hidden"
-          md-direction="left"
-          md-open="cc.isOpen"
-          class="md-scale md-fab-bottom-right"
-          ng-class="{ 'md-hover-full': cc.hover }"
-          ng-mouseenter="cc.isOpen=true"
-          ng-mouseleave="cc.isOpen=false">
-          <md-fab-trigger>
-            <md-button aria-label="Social" class="md-fab md-accent md-hue-1">
-              <md-tooltip md-direction="top" md-visible="tooltipVisible">Social Contact</md-tooltip>
-              <md-icon md-svg-src="img/ic_share_black_24px.svg" aria-label="Social"></md-icon>
-            </md-button>
-          </md-fab-trigger>
-          <md-fab-actions>
-            <div ng-repeat="item in cc.items">
-              <md-button ng-href="{{item.url}}" target="_blank" aria-label="{{item.name}}" class="md-fab md-raised md-mini">
-                <md-tooltip md-direction="{{item.direction}}" md-visible="tooltipVisible" md-autohide="false">
-                  {{item.name}}
-                </md-tooltip>
-
-                <md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>
-              </md-button>
-            </div>
-          </md-fab-actions>
-        </md-fab-speed-dial>
-      </div>
     </md-content>
   </ion-content>
+  <div>
+    <md-fab-speed-dial ng-hide="cc.hidden" md-direction="left" md-open="cc.isOpen" class="md-fling md-fab-bottom-right" ng-class="{ 'md-hover-full': cc.hover }"
+      ng-mouseenter="cc.isOpen=true" ng-mouseleave="cc.isOpen=false">
+      <md-fab-trigger>
+        <md-button aria-label="Social" class="md-fab">
+          <md-icon md-svg-src="img/ic_share_black_24px.svg" aria-label="Social"></md-icon>
+        </md-button>
+      </md-fab-trigger>
+      <md-fab-actions>
+        <div ng-repeat="item in cc.items">
+          <md-button ng-click="cc.openLink(item.url)" aria-label="{{item.name}}" class="md-fab md-raised md-mini">
+            <md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>
+          </md-button>
+        </div>
+      </md-fab-actions>
+      </md-fab-speed-dial>
+  </div>
 </ion-view>
-

@@ -11,6 +11,9 @@
       cc.hidden = false;
       cc.isOpen = false;
       cc.hover = true;
+      cc.openLink = function(URL){
+        window.open(URL, '_system');
+      }
 
       // On opening, add a delayed property which shows tooltips after the speed dial has opened
       // so that they have the proper position; if closing, immediately hide the tooltips
