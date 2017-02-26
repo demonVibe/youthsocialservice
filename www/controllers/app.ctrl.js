@@ -2,13 +2,13 @@
   'use strict';
 
   angular.module('starter.controllers', [])
-    .controller('AppCtrl', function ($rootScope, $scope, $timeout, $log, $ionicModal, $ionicSideMenuDelegate, firebaseDataService, currentUser) {
+    .controller('AppCtrl', function ($rootScope, $scope, $timeout, $log, $ionicModal, $ionicSideMenuDelegate, firebaseDataService, currentUser, $state) {
 
       var app = angular.extend(this, {
         userLoggedIn: false,
         userInfo: {}
       });
-      
+
       activate();
       function activate() {
         if (window.cordova) {
@@ -79,7 +79,21 @@
       $scope.closeSideMenu = function (data) {
         $ionicSideMenuDelegate.toggleLeft();
         if (data === 'logout') {
-          console.log('logout')
+          app.userLoggedIn=false;
+          localforage.setItem('currentUser', {}).then(function () {
+          });
+          Object.keys(currentUser).forEach(function (key) {
+            delete currentUser[key];
+          });
+          console.log("All Local Data cleared");
+          firebase.auth().signOut().then(function () {
+            // Sign-out successful.
+            console.log("Email Sign-out successful.");
+          }, function (error) {
+            // An error happened.
+            console.log("An error happened.", error);
+          });
+          $state.go('app.home');
         }
       }
     })
