@@ -31,19 +31,20 @@
             <!-- Spacer //-->
           </div>
 
-          <md-input-container class="md-block" flex-gt-sm="">
+          <md-input-container class="md-icon-float md-icon-right md-block" flex-gt-sm="" ng-init="ac.inputType = 'password'">
             <label>Password</label>
-            <input type="password" name="password" ng-model="ac.password" required="" minlength="6">
-
-            <div ng-messages="loginForm.password.$error" multiple="" md-auto-hide="true">
-              <div ng-message="required">
-                Password is required!
+            <input type="{{ac.inputType}}" name="password" ng-model="ac.password" required="" minlength="6" style="border-bottom-style: solid !important;
+                 border-bottom-color: rgba(0,0,0,0.12) !important;border-bottom: 1px;">
+              <md-icon md-svg-src="img/eye/cartoon-sad-eyes.svg" ng-if="ac.inputType == 'password'" ng-click="ac.inputType = 'text'"></md-icon>
+              <md-icon md-svg-src="img/eye/cartoon-happy-eyes.svg" ng-if="ac.inputType == 'text'" ng-click="ac.inputType = 'password'"></md-icon>
+              <div ng-messages="loginForm.password.$error" multiple="" md-auto-hide="true">
+                <div ng-message="required">
+                  Password is required!
+                </div>
+                <div ng-message="minlength">
+                  Your Password must be between 6 to 50 characters
+                </div>
               </div>
-
-              <div ng-message="minlength">
-                Your Password must be between 6 to 50 characters
-              </div>
-            </div>
           </md-input-container>
         </div>
       </form>

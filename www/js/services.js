@@ -13,8 +13,10 @@
       var eventsRef = firebase.database().ref().child('events');
       return $firebaseArray(eventsRef).$loaded();
       })
-      .factory('User', function() {
-        return {}
+      .factory('currentUser', function() {
+        return {
+          details:{}
+        }
       })
       .service('firebaseDataService', firebaseDataService);
 
@@ -28,6 +30,7 @@
         fbSignUp: fbSignUp,
         googleSignUp: googleSignUp,
         emailSignUp: emailSignUp,
+        updateToken: updateToken,
       };
       ////////////////
 
@@ -39,6 +42,7 @@
           console.log(err);
         })
       }
+
       function emailSignUp(userId, userData) {
         db.child('/users/'+ userId).set(userData);
       }
@@ -55,6 +59,11 @@
       function googleSignUp(userId, userData) {
         var ref = db.child('/customers/');
         ref.child(userId).set(userData);
+      }
+
+      function updateToken(userId, token) {
+        var ref = db.child('/customers/' + userId);
+        return ref.update({'device_token': token});
       }
     }
 

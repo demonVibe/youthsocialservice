@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "217612140199",
+    "firebase_url": "https://fir-youthsocialservice.firebaseio.com",
+    "project_id": "firebase-youthsocialservice",
+    "storage_bucket": "firebase-youthsocialservice.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:217612140199:android:ecbcce3afa108582",
+        "android_client_info": {
+          "package_name": "org.youthsocialservice.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "217612140199-si9h1g9csi5tonma108c6alaa91uv67j.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "217612140199-fg2nnhgnuo59f1lak5at702i1ukr77jq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.youthsocialservice.app",
+            "certificate_hash": "6ab0e75934db33459e6fa6e129992e45bf22b1e1"
+          }
+        },
+        {
+          "client_id": "217612140199-7v56ppq2mqaiegqqo8rukv8n4q5d9fqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVZfr0VvXkvFXwEIfInzATIXeAkNmjmP4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "217612140199-si9h1g9csi5tonma108c6alaa91uv67j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
