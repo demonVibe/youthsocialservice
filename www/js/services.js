@@ -35,12 +35,7 @@
       ////////////////
 
       function getUserDetails(userId) {
-        var ref = db.child('/users/'+ userId);
-        ref.on("value", function (snapshot) {
-          return snapshot.val();
-        },function (err) {
-          console.log(err);
-        })
+        return db.child('/users/'+ userId);
       }
 
       function emailSignUp(userId, userData) {

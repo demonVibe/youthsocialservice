@@ -68,18 +68,22 @@
           }, 10);
           $ionicLoading.hide()
         }
-        var newUser = firebaseDataService.getUserDetails(currentUser.details.userId);
-        if (newUser == null) {
-          firebaseDataService.emailSignUp(currentUser.details.userId, currentUser);
-        }
-        $rootScope.$broadcast('user: loggedIn');
-        localforage.setItem('currentUser', currentUser.details).then(function () {
-          console.log("Saved to LocalForage")
+        firebaseDataService.getUserDetails(currentUser.details.userId).on("value", function (snapshot) {
+          if (snapshot.val() == null) {
+            firebaseDataService.emailSignUp(currentUser.details.userId, currentUser.details);
+          } else {
+            currentUser.details = snapshot.val();
+          }
+          $rootScope.$broadcast('user: loggedIn');
+          localforage.setItem('currentUser', currentUser.details).then(function () {
+            console.log("Saved to LocalForage", currentUser.details)
+          });
+        }, function (err) {
+          console.log(err);
         });
         $timeout(function () {
           ac.loading = false;
         }, 10);
-        console.log(currentUser.details);
         $ionicLoading.hide();
         $ionicHistory.nextViewOptions({
           disableBack: true
@@ -286,7 +290,7 @@
       panelClass: 'signup-panel-container',
       position: position,
       trapFocus: true,
-      zIndex: 150,
+      zIndex: 12,
       clickOutsideToClose: false,
       clickEscapeToClose: false,
       hasBackdrop: true,
@@ -296,7 +300,7 @@
     this._mdPanel.open(config);
   };
 
-  function PanelCtrl(mdPanelRef, currentUser, firebaseDataService, $rootScope, $timeout, $stateParams, $state, $scope, $ionicHistory) {
+  function PanelCtrl(mdPanelRef, currentUser, firebaseDataService, $rootScope, $timeout, $stateParams, $state, $scope, $ionicHistory, $ionicLoading) {
     var pc = angular.extend(this, {
       email: "",
       password: "",
@@ -309,6 +313,8 @@
       address2: "",
       city: "",
       postcode: "",
+      minDate: new Date("january 1, 1950 00:00:00"),
+      maxDate: new Date("december 31, 2016 00:00:00"),
     });
 
     this._mdPanelRef = mdPanelRef;
@@ -317,6 +323,7 @@
     };
     pc.createAccount = function () {
       pc.loading = true;
+      $ionicLoading.show({ hideOnStateChange: true });
       if (window.cordova) {
         document.addEventListener("deviceready", readyForSnack, false);
         //noinspection JSAnnotator
@@ -355,39 +362,45 @@
               'createdAt': new Date() + "",
               'device_token': $rootScope.deviceToken || ""
             };
-            var newUser = firebaseDataService.getUserDetails(currentUser.details.userId);
-            if (newUser == null) {
-              firebaseDataService.emailSignUp(currentUser.details.userId, currentUser.details);
-            }
-            $rootScope.$broadcast('user: loggedIn');
-            localforage.setItem('currentUser', currentUser.details).then(function () {
-              console.log("Saved to LocalForage", currentUser.details)
-            });
-            if (window.cordova) {
-              //noinspection JSUnresolvedFunction
-              cordova.plugins.snackbar('Congrats! Account created successfully!', 'LONG', "", function () {
-
+            firebaseDataService.getUserDetails(currentUser.details.userId).on("value", function (snapshot) {
+              // console.log("snap", snapshot.val())
+              if (snapshot.val() == null) {
+                firebaseDataService.emailSignUp(currentUser.details.userId, currentUser.details);
+              } else {
+                currentUser.details = snapshot.val();
+              }
+              $rootScope.$broadcast('user: loggedIn');
+              localforage.setItem('currentUser', currentUser.details).then(function () {
+                // console.log("Saved to LocalForage", currentUser.details)
               });
-            }
-            pc.closeDialog();
-            $timeout(function () {
-              pc.loading = false;
-            }, 10);
-            $ionicHistory.nextViewOptions({
-              disableBack: true
-            });
-            // noinspection JSUnresolvedVariable
-            if ($stateParams.prevState) {
-              //noinspection JSUnresolvedVariable
-              $state.go($stateParams.prevState);
-            } else {
-              $state.go('app.home');
-            }
-          } else {
+              if (window.cordova) {
+                //noinspection JSUnresolvedFunction
+                cordova.plugins.snackbar('Congrats! Account created successfully!', 'LONG', "", function () {
+
+                });
+              }
+              pc.closeDialog();
+              $timeout(function () {
+                pc.loading = false;
+              }, 10);
+              $ionicHistory.nextViewOptions({
+                disableBack: true
+              });
+              // noinspection JSUnresolvedVariable
+              if ($stateParams.prevState) {
+                //noinspection JSUnresolvedVariable
+                $state.go($stateParams.prevState);
+              } else {
+                $state.go('app.home');
+              }
+            })
+          } 
+          else {
             console.log("user is null");
             $timeout(function () {
               pc.loading = false;
             }, 10);
+            $ionicLoading.hide();
           }
         },
           function (error) {
@@ -406,6 +419,7 @@
             $timeout(function () {
               pc.loading = false;
             }, 10);
+            $ionicLoading.hide();
           });
         // return info.promise;
       }, function (error) {
@@ -424,6 +438,7 @@
         $timeout(function () {
           pc.loading = false;
         }, 10);
+        $ionicLoading.hide();
       });
     }
   }

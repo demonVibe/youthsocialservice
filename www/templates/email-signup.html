@@ -2,7 +2,10 @@
   <div role="dialog" aria-label="Create Your Account" layout="column">
     <md-toolbar style="background-color: darkslategrey;">
       <div class="md-toolbar-tools">
-        <h2 flex="90" style="color: white">Create Your Account!</h2>
+        <md-button class="md-icon-button" ng-click="pc.closeDialog($event)">
+          <md-icon md-svg-src="img/icons/ic_arrow_back_white_24px.svg" aria-label="Close"></md-icon>
+        </md-button>
+        <h2 flex="" style="color: white">Create Your Account!</h2>
         <md-button class="md-icon-button" ng-click="pc.closeDialog($event)">
           <md-icon md-svg-src="img/icons/ic_close_white_24px.svg" aria-label="Close"></md-icon>
         </md-button>
@@ -36,7 +39,7 @@
           </md-input-container>
           <md-input-container class="md-block">
             <label>Date of Birth</label>
-            <md-datepicker name="dob" ng-model="pc.dob" required=""></md-datepicker>
+            <md-datepicker name="dob" ng-model="pc.dob" required="" md-min-date="pc.minDate" md-max-date="pc.maxDate"></md-datepicker>
             <div ng-messages="signupForm.dob.$error">
               <div ng-message="required" class="my-message">Required!</div>
             </div>
