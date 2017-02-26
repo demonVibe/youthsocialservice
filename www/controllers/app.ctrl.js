@@ -89,6 +89,11 @@
           firebase.auth().signOut().then(function () {
             // Sign-out successful.
             console.log("Email Sign-out successful.");
+            if (window.cordova) {
+              //noinspection JSUnresolvedFunction
+              cordova.plugins.snackbar('Logged Out Successfully!', 'LONG', "", function () {
+              })
+            }
           }, function (error) {
             // An error happened.
             console.log("An error happened.", error);

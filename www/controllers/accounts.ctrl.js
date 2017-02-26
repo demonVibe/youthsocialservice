@@ -77,22 +77,27 @@
           $rootScope.$broadcast('user: loggedIn');
           localforage.setItem('currentUser', currentUser.details).then(function () {
             console.log("Saved to LocalForage", currentUser.details)
+            if (window.cordova) {
+              //noinspection JSUnresolvedFunction
+              cordova.plugins.snackbar('Logged In Successfully!', 'LONG', "", function () {
+              })
+            }
+            $timeout(function () {
+              ac.loading = false;
+            }, 10);
+            $ionicLoading.hide();
+            $ionicHistory.nextViewOptions({
+              disableBack: true
+            });
+            if ($stateParams.prevState) {
+              $state.go($stateParams.prevState);
+            } else {
+              $state.go('app.home')
+            }
           });
         }, function (err) {
           console.log(err);
         });
-        $timeout(function () {
-          ac.loading = false;
-        }, 10);
-        $ionicLoading.hide();
-        $ionicHistory.nextViewOptions({
-          disableBack: true
-        });
-        if ($stateParams.prevState) {
-          $state.go($stateParams.prevState);
-        } else {
-          $state.go('app.home')
-        }
       }, function (error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -394,7 +399,7 @@
                 $state.go('app.home');
               }
             })
-          } 
+          }
           else {
             console.log("user is null");
             $timeout(function () {
