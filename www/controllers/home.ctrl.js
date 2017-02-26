@@ -9,16 +9,19 @@
       var home = angular.extend(this, {
         founders: [
           {
-            image: 'http://lorempixel.com/400/300/people'
+            image: 'https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/temporary%2F1.JPG?alt=media&token=d69c30d4-d01a-48e4-a533-0a0104d551e2'
           },
           {
-            image: 'http://lorempixel.com/400/300/food'
+            image: 'https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/temporary%2F2.JPG?alt=media&token=d69c30d4-d01a-48e4-a533-0a0104d551e2'
           },
           {
-            image: 'http://lorempixel.com/400/300/sports'
+            image: 'https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/temporary%2F3.JPG?alt=media&token=d69c30d4-d01a-48e4-a533-0a0104d551e2'
           },
           {
-            image: 'http://lorempixel.com/400/300/'
+            image: 'https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/temporary%2F4.JPG?alt=media&token=d69c30d4-d01a-48e4-a533-0a0104d551e2'
+          },
+          {
+            image: 'https://firebasestorage.googleapis.com/v0/b/firebase-youthsocialservice.appspot.com/o/temporary%2F5.JPG?alt=media&token=d69c30d4-d01a-48e4-a533-0a0104d551e2'
           }
         ],
         members: [
