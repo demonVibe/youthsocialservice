@@ -34,12 +34,12 @@
           direction: "bottom",
           url: 'https://youthsocialservicesy2s.blogspot.in'
         },
-        {
-          name: "Twitter",
-          icon: "img/social-hand-drawn/svg/twitter-draw-logo.svg",
-          direction: "top",
-          url: 'https://m.facebook.com/y2s2414/'
-        },
+        // {
+        //   name: "Twitter",
+        //   icon: "img/social-hand-drawn/svg/twitter-draw-logo.svg",
+        //   direction: "top",
+        //   url: 'https://m.facebook.com/y2s2414/'
+        // },
         {
           name: "Instagram",
           icon: "img/social-hand-drawn/svg/instagram-draw-logo.svg",
