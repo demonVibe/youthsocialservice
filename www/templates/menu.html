@@ -18,28 +18,14 @@
     </ion-header-bar>
     <ion-content>
       <md-content layout-align="top center">
-        <md-card ng-if="app.userLoggedIn">
-          <ion-item class="item-thumbnail-left" ng-if="vm.status.id">
+        <ion-list>
+          <ion-item class="item-thumbnail-left" ng-if="app.userLoggedIn">
             <img ng-src="{{app.userInfo.picture}}">
             <h2>{{app.userInfo.name}}</h2>
             <p>{{app.userInfo.email}}</p>
           </ion-item>
-          <!--<md-card-title>-->
-            <!--<md-card-title-text>-->
-              <!--<span class="md-headline">{{app.userInfo.name}}</span>-->
-              <!--<span class="md-subhead">{{app.userInfo.email}}</span>-->
-            <!--</md-card-title-text>-->
-            <!--<md-card-title-media>-->
-              <!--<div class="md-media-sm card-media">-->
-                <!--&lt;!&ndash;<img ng-src="{{app.userInfo.picture}}">&ndash;&gt;-->
-              <!--</div>-->
-            <!--</md-card-title-media>-->
-          <!--</md-card-title>-->
-          <!--<md-card-actions layout="row" layout-align="end center">-->
-            <!--<md-button>Action 1</md-button>-->
-            <!--<md-button>Action 2</md-button>-->
-          <!--</md-card-actions>-->
-        </md-card>
+        </ion-list>
+        </md-card>-->
         <md-list flex="">
           <md-list-item class="md-list-item-text" ng-click="closeSideMenu()" aria-label="The Crisis" ui-sref="app.crisis">
             The Crisis
