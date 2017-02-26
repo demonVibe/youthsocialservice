@@ -10,8 +10,8 @@ hooks
 node_modules
 plugins
 res
-resources/android/
 resources/ios/
+resources/android/
 scss
 www/lib/
 www.zip
